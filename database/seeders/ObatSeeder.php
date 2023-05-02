@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Obat;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,10 @@ class ObatSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Obat::create([
+            'kode' => 'A001',
+            'nama' => 'Paracetamol',
+            'keterangan' => 'Meredakan Panas'
+        ]);
     }
 }
