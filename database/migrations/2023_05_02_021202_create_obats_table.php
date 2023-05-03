@@ -15,8 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('kode');
             $table->string('nama');
+            $table->date('kadaluwarsa')->nullable();
             $table->string('keterangan');
+            $table->bigInteger('stok');
+            $table->unsignedBigInteger('kategori_obat_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('kategori_obat_id')->references('id')->on('kategori_obats')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

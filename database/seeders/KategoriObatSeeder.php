@@ -2,22 +2,19 @@
 
 namespace Database\Seeders;
 
-use App\Models\Obat;
+use App\Models\KategoriObat;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ObatSeeder extends Seeder
+class KategoriObatSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Obat::create([
-            'kode' => 'A001',
-            'nama' => 'Paracetamol',
-            'keterangan' => 'Meredakan Panas',
-            'stok' => 10,
+        KategoriObat::create([
+            'nama' => 'Obat Panas'
         ]);
     }
 }

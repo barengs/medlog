@@ -10,7 +10,7 @@
         </a>
     </div>
     <div class="sidebar-header">
-        <div class="text">MedLog</div>
+        <div class="text">KliKlinik</div>
         <div class="close-sidebar action-toggle">
             <i class="ti-close"></i>
         </div>
@@ -29,8 +29,8 @@
                     <span>Pemeriksaan</span>
                 </a>
                 <ul class="sub-menu ">
-                    <li><a href="/checkup/periksa" class="link"><span>Periksa Pasien</span></a></li>
-                    <li><a href="element-accordion.html" class="link"><span>Laporan Pemeriksaan</span></a></li>
+                    <li><a href="/checkup/tambah" class="link"><span>Periksa Pasien</span></a></li>
+                    <li><a href="/pasien/semua" class="link"><span>Riwayat Medis</span></a></li>
                 </ul>
             </li>
             <li>
@@ -39,10 +39,10 @@
                     <span>Obat</span>
                 </a>
                 <ul class="sub-menu ">
-                    <li><a href="/obat" class="link">
+                    <li><a href="/obat/semua" class="link">
                             <span>Daftr Obat</span></a>
                     </li>
-                    <li><a href="/kategori-obat" class="link">
+                    <li><a href="/kategori-obat/semua" class="link">
                             <span>Kategori Obat</span></a>
                     </li>
                 </ul>
@@ -53,8 +53,8 @@
                     <span>Pengguna</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="/pengguna/semua" target="_blank" class="link"><span>Karyawan</span></a></li>
-                    <li><a href="/jabatan" target="_blank" class="link"><span>Jabatan</span></a></li>
+                    <li><a href="/pengguna/semua" class="link"><span>Karyawan</span></a></li>
+                    <li><a href="/jabatan/semua" class="link"><span>Jabatan</span></a></li>
                 </ul>
             </li>
             <li>
@@ -63,11 +63,11 @@
                     <span>Setting</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="auth-login.html" target="_blank" class="link"><span>Login</span></a></li>
-                    <li><a href="auth-register.html" target="_blank" class="link"><span>Register</span></a></li>
+                    <li><a href="auth-login.html" class="link"><span>Login</span></a></li>
+                    <li><a href="auth-register.html" class="link"><span>Register</span></a></li>
                 </ul>
             </li>
-            <li>
+            {{-- <li>
                 <a href="#" class="main-menu has-dropdown">
                     <i class="ti-write"></i>
                     <span>Tables</span>
@@ -76,13 +76,7 @@
                     <li><a href="table-basic.html" class="link"><span>Table Basic</span></a></li>
                     <li><a href="table-datatables.html" class="link"><span>DataTables</span></a></li>
                 </ul>
-            </li>
-            <li>
-                <a href="charts.html" class="link">
-                    <i class="ti-bar-chart"></i>
-                    <span>Charts</span>
-                </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </nav> 

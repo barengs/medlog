@@ -10,7 +10,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Monthly Sales</h4>
+                        <h4>Jumlah Kunjungan Bulanan</h4>
                     </div>
                     <div class="card-body">
                         <canvas id="myChart" height="642" width="1388"></canvas>
@@ -20,11 +20,11 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Statistics</h4>
+                        <h4>Statistik Rawat - Rujuk</h4>
                     </div>
                     <div class="card-body">
                         <div class="progress-wrapper">
-                            <h4>Progress 25%</h4>
+                            <h4>Rawat (di Klinik) 25%</h4>
                             <div class="progress progress-bar-small">
                                 <div class="progress-bar progress-bar-small" style="width: 25%" role="progressbar"
                                     aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         <div class="progress-wrapper">
-                            <h4>Progress 45%</h4>
+                            <h4>Rujuk (ke RS) 45%</h4>
                             <div class="progress progress-bar-small">
                                 <div class="progress-bar progress-bar-small bg-pink" style="width: 45%"
                                     role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
@@ -51,8 +51,8 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="header-statistics">
-                        <h5>Monthly Statistics</h5>
-                        <p>Based On Major Browser</p>
+                        <h5>Statistik Diagnosa Bulanan</h5>
+                        <p>Berdasarkan rata-rata kunjungan</p>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -104,7 +104,7 @@
     </div>
     <div class="content-wrapper">
         <div class="row same-height">
-            <div class="col-md-4">
+            {{-- <div class="col-md-4">
                 <div class="card">
                     <!-- <div class="float-label">
                         <h6>Sales</h6>
@@ -126,8 +126,8 @@
                         <div id="apex-chart-bar"></div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
+            </div> --}}
+            {{-- <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
                         <h4>Activities</h4>
@@ -218,7 +218,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
@@ -421,9 +421,11 @@
 @endsection
 
 @push('css')
-    
+<link rel="stylesheet" href="{{ asset('vendor/chart.js/dist/Chart.min.css') }}">
 @endpush
 
 @push('js')
-    
+<script src="{{ asset('vendor/chart.js/dist/Chart.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="{{ asset('assets/js/page/index.js') }}"></script>
 @endpush

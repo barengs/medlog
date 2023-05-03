@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/perfect-scrollbar/css/perfect-scrollbar.css') }}">
 
     <!-- CSS for this page only -->
-<link rel="stylesheet" href="{{ asset('vendor/chart.js/dist/Chart.min.css') }}">
+    @stack('css')
     <!-- End CSS  -->
 
     <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}">
@@ -94,18 +94,17 @@
         <div class="overlay action-toggle">
         </div>
     </div>
-    <script src="../vendor/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    <script src="../vendor/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
+    <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ asset('vendor/perfect-scrollbar/dist/perfect-scrollbar.min.js') }}"></script>
 
     <!-- js for this page only -->
-<script src="../vendor/chart.js/dist/Chart.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script src="../assets/js/page/index.js"></script>
+
     <!-- ======= -->
-    <script src="../assets/js/main.js"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
     <script>
         Main.init()
     </script>
+    @stack('js')
 </body>
 
 </html>

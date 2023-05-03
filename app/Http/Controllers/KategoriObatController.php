@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pasien;
+use App\Models\KategoriObat;
 use Illuminate\Http\Request;
 
-class PasienController extends Controller
+class KategoriObatController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = Pasien::all();
-        return view('pages.pasien.index', compact('data'));
+        return view('pages.kategori.index');
     }
 
     /**
@@ -21,7 +20,7 @@ class PasienController extends Controller
      */
     public function create()
     {
-        return view('pages.pasien.add');
+        //
     }
 
     /**
@@ -35,15 +34,15 @@ class PasienController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pasien $pasien)
+    public function show(KategoriObat $kategoriObat)
     {
-        return view('pages.pasien.show');
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pasien $pasien)
+    public function edit(KategoriObat $kategoriObat)
     {
         //
     }
@@ -51,7 +50,7 @@ class PasienController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pasien $pasien)
+    public function update(Request $request, KategoriObat $kategoriObat)
     {
         //
     }
@@ -59,7 +58,7 @@ class PasienController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pasien $pasien)
+    public function destroy(KategoriObat $kategoriObat)
     {
         //
     }

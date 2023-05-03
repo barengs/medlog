@@ -12,7 +12,8 @@ class ObatController extends Controller
      */
     public function index()
     {
-        return view('pages.obat.index');
+        $data = Obat::all();
+        return view('pages.obat.index', compact('data'));
     }
 
     /**

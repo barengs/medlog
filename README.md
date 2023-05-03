@@ -1,13 +1,8 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
 ## About MEDLOG
+
+MedLog is a medical record web application base on Laravel.
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
@@ -30,7 +25,14 @@ git clone https://github.com/barengs/medlog.git
 cd medlog
 composer install
 php artisan migrate
+php artisan db:seed
 php artisan serve
+```
+
+atau bisa secara singkat bisa menggabungkan `migrate` dan `seed` sekaligus dengan perintah:
+
+```
+php artisan migrate:fresh --seed
 ```
 
 bila ada perubahan, tambahkan branch (ruang kerja) dengan perintah berikut:
@@ -64,7 +66,7 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Thank you for considering contributing to the MedLog Apps! The contribution guide can be found in the [MedLog documentation](https://barengsaya.com).
 
 ## Code of Conduct
 

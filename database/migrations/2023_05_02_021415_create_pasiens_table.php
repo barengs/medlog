@@ -16,11 +16,13 @@ return new class extends Migration
             $table->string('no_pasien');
             $table->string('nama_depan');
             $table->string('nama_belakang')->nullable();
+            $table->enum('jenis_kelamin', ['pria', 'wanita']);
             $table->string('no_ktp');
             $table->string('alamat');
             $table->string('no_hp')->nullable();
             $table->unsignedBigInteger('village_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

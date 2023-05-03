@@ -3,7 +3,7 @@
 @section('content')
 <div class="main-content">
     <div class="title">
-        Obat-Obatan
+        Level Jabatan Karyawan
     </div>
     <div class="content-wrapper">
         <div class="row same-height">
@@ -11,7 +11,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>DATA OBAT-OBATAN</h4>
+                        <h4>DATA LEVEL JABATAN</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -19,25 +19,26 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Kode Obat</th>
-                                        <th scope="col">Nama</th>
-                                        <th scope="col">Tanggal Kadaluwarsa</th>
-                                        <th scope="col">Stok</th>
+                                        <th scope="col">Nama Jabatan</th>
                                         <th scope="col">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data as $item)
                                     <tr>
                                         <th scope="row">1</th>
-                                        <td>{{ $item->kode }}</td>
-                                        <td>{{ $item->nama }}</td>
-                                        <td class="text-center">{{ $item->kadaluwarsa ? $item->kadaluwarsa : '-' }}</td>
-                                        <td class="text-center">{{ $item->stok }}</td>
+                                        <td>Cell</td>
                                         <td>Cell</td>
                                     </tr>
-                                        
-                                    @endforeach
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Cell</td>
+                                        <td>Cell</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -48,3 +49,11 @@
     </div>
 </div>   
 @endsection
+
+@push('css')
+    
+@endpush
+
+@push('js')
+    
+@endpush
