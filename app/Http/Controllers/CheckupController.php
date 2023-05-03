@@ -36,7 +36,7 @@ class CheckupController extends Controller
      */
     public function show(Checkup $checkup)
     {
-        //
+        return view('pages.checkup.show');
     }
 
     /**

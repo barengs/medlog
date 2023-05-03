@@ -54,7 +54,12 @@
                                         <td>{{ $item->nama_depan . ' ' . $item->nama_belakang }}</td>
                                         <td>{{ $item->jenis_kelamin }}</td>
                                         <td>Cell</td>
-                                        <td><a class="btn btn-secondary btn-sm" href="{{ route('checkup.lihat', $item->id) }}">Riwayat Medis</a></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a class="btn icon-left btn-info btn-sm" href="{{ route('checkup.lihat', $item->id) }}"><i class="ti-close"></i>Riwayat Medis</a>
+                                                
+                                            </div>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>

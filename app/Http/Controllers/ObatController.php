@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Obat;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ObatController extends Controller
@@ -21,7 +22,7 @@ class ObatController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.obat.add');
     }
 
     /**
@@ -29,7 +30,18 @@ class ObatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = Obat::create([
+            'kode' => $request->kode,
+            'nama' => $request->nama,
+            'keterangan' => $request->keterangan,
+            'stok' => $request->stok,
+            'kadaluwarsa' => Carbon::parse($request->kadaluwarsa)->format('Y/m/d'),
+        ]);
+        if ($input) {
+            return redirect()->route('obat.semua');
+        } else {
+            return back()->withInput();
+        }
     }
 
     /**
@@ -37,15 +49,17 @@ class ObatController extends Controller
      */
     public function show(Obat $obat)
     {
-        //
+        return view('pages.obat.show');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Obat $obat)
+    public function edit(Obat $obat, $id)
     {
-        //
+        $data = Obat::find($id);
+        // dd($data);
+        return view('pages.obat.edit', compact('data'));
     }
 
     /**

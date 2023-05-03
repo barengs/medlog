@@ -43,6 +43,7 @@ Route::group(['prefix' => 'jabatan'], function () {
 
 Route::group(['prefix' => 'obat'], function () {
     Route::get('semua', [ObatController::class, 'index'])->name('obat.semua');
+    Route::get('lihat/{id}', [ObatController::class, 'show'])->name('obat.lihat');
     Route::get('tambah', [ObatController::class, 'create'])->name('obat.tambah');
     Route::post('simpan', [ObatController::class, 'store'])->name('obat.simpan');
     Route::get('ubah/{id}', [ObatController::class, 'edit'])->name('obat.ubah');

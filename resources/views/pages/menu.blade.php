@@ -55,12 +55,14 @@
                 <ul class="sub-menu">
                     <li><a href="/pengguna/semua" class="link"><span>Karyawan</span></a></li>
                     <li><a href="/jabatan/semua" class="link"><span>Jabatan</span></a></li>
+                    <li><a href="/role/semua" class="link"><span>Peran</span></a></li>
+                    <li><a href="/permission/semua" class="link"><span>Izin</span></a></li>
                 </ul>
             </li>
             <li>
                 <a href="#" class="main-menu has-dropdown">
                     <i class="ti-settings"></i>
-                    <span>Setting</span>
+                    <span>Pengaturan</span>
                 </a>
                 <ul class="sub-menu">
                     <li><a href="auth-login.html" class="link"><span>Login</span></a></li>

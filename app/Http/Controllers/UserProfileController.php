@@ -20,7 +20,7 @@ class UserProfileController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.karyawan.add');
     }
 
     /**
