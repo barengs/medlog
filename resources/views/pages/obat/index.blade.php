@@ -44,7 +44,7 @@
                                         <th scope="row">1</th>
                                         <td>{{ $item->kode }}</td>
                                         <td>{{ $item->nama }}</td>
-                                        <td class="text-center">{{ $item->kadaluwarsa ? $item->kadaluwarsa : '-' }}</td>
+                                        <td class="text-center">{{ $item->kadaluwarsa ? date('d M Y', strtotime($item->kadaluwarsa)) : '-' }}</td>
                                         <td class="text-center">{{ $item->stok }}</td>
                                         <td class="text-center">
                                             <div class="btn-group">

@@ -65,9 +65,24 @@ class ObatController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Obat $obat)
+    public function update(Request $request, $id)
     {
-        //
+        $data = Obat::findOrFail($id);
+        // dd($data);
+
+        $data->kode = $request->kode;
+        $data->nama = $request->nama;
+        $data->kadaluwarsa = Carbon::parse($request->kadaluwarsa)->format('Y/m/d');
+        $data->stok = $request->stok;
+        $data->keterangan = $request->keterangan;
+
+        $data->update();
+
+        if ($data) {
+            return redirect()->route('obat.semua');
+        } else {
+            return back()->withInput();
+        }
     }
 
     /**

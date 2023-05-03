@@ -12,6 +12,8 @@ class Obat extends Model
 
     protected $fillable = ['kode', 'nama', 'kadaluwarsa', 'keterangan', 'stok', 'kategori_obat_id'];
 
+    protected $dates = ['kadaluwarsa'];
+
     public function kategori()
     {
         return $this->belongsTo(KategoriObat::class);

@@ -47,7 +47,7 @@ Route::group(['prefix' => 'obat'], function () {
     Route::get('tambah', [ObatController::class, 'create'])->name('obat.tambah');
     Route::post('simpan', [ObatController::class, 'store'])->name('obat.simpan');
     Route::get('ubah/{id}', [ObatController::class, 'edit'])->name('obat.ubah');
-    Route::patch('ganti/{id}', [ObatController::class, 'update'])->name('obat.ganti');
+    Route::put('ubah/{id}/ganti', [ObatController::class, 'update'])->name('obat.ganti');
     Route::delete('hapus/{id}', [ObatController::class, 'destroy'])->name('obat.hapus');
 });
 
