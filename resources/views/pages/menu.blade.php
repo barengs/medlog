@@ -18,7 +18,7 @@
     <div class="sidebar-content">
         <ul>
             <li class="active">
-                <a href="index.html" class="link">
+                <a href="/" class="link">
                     <i class="ti-home"></i>
                     <span>Dashboard</span>
                 </a>
@@ -29,7 +29,7 @@
                     <span>Pemeriksaan</span>
                 </a>
                 <ul class="sub-menu ">
-                    <li><a href="element-ui.html" class="link"><span>Periksa Pasien</span></a></li>
+                    <li><a href="/checkup/periksa" class="link"><span>Periksa Pasien</span></a></li>
                     <li><a href="element-accordion.html" class="link"><span>Laporan Pemeriksaan</span></a></li>
                 </ul>
             </li>
@@ -53,7 +53,7 @@
                     <span>Pengguna</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="/pengguna" target="_blank" class="link"><span>Karyawan</span></a></li>
+                    <li><a href="/pengguna/semua" target="_blank" class="link"><span>Karyawan</span></a></li>
                     <li><a href="/jabatan" target="_blank" class="link"><span>Jabatan</span></a></li>
                 </ul>
             </li>
