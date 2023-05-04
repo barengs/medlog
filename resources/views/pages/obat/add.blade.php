@@ -14,6 +14,7 @@
     </nav>
 </div>
     <div class="content-wrapper">
+      {{-- perhatikan bagian ini, alamat atau route --}}
       <form action="{{ route('obat.simpan') }}" method="POST">
       <div class="card">
         <div class="card-header d-flex justify-content-between">

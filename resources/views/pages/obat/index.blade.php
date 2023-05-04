@@ -21,6 +21,7 @@
                     <div class="card-header d-flex justify-content-between">
                         <h4>DATA OBAT-OBATAN</h4>
                         <div class="btn-group float-end" role="group" aria-label="Basic mixed styles example">
+                            {{-- perhatikan disini --}}
                             <a class="btn icon-left btn-primary btn-sm" href="{{ route('obat.tambah') }}"><i class="ti-plus"></i>Tambah Obat</a>
                             <a class="btn icon-left btn-info btn-sm" href="{{ route('dashboard') }}"><i class="ti-printer"></i>Cetak Laporan</a>
                         </div>
@@ -39,6 +40,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {{-- perhatikan disini --}}
+                                    @if ($data)
                                     @foreach ($data as $item)
                                     <tr>
                                         <th scope="row">1</th>
@@ -54,8 +57,8 @@
                                             </div>
                                         </td>
                                     </tr>
-                                        
                                     @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

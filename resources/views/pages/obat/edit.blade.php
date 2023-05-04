@@ -14,6 +14,7 @@
     </nav>
 </div>
     <div class="content-wrapper">
+      {{-- perhatikan bagian route --}}
       <form action="{{ route('obat.ganti', $data->id) }}" method="POST">
         @method('PUT')
           @csrf
