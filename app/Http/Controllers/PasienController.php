@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Pasien;
 use Illuminate\Http\Request;
+use App\DataTables\PasienDataTable;
 
 class PasienController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(PasienDataTable $dataTable)
     {
         $data = Pasien::all();
-        return view('pages.pasien.index', compact('data'));
+        return $dataTable->render('pages.pasien.index');
     }
 
     /**

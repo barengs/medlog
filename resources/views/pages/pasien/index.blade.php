@@ -26,8 +26,8 @@
                             </dv>
                             <dv class="col">
                                 <div class="btn-group float-end" role="group" aria-label="Basic mixed styles example">
-                                    <a class="btn btn-primary btn-sm" href="{{ route('pasien.tambah') }}">Daftarkan Pasien</a>
-                                    <a class="btn btn-secondary btn-sm" href="{{ route('dashboard') }}">Kembali</a>
+                                    <a class="btn btn-primary btn-sm icon-left" href="{{ route('pasien.tambah') }}"><i class="ti-list"></i>Daftarkan Pasien</a>
+                                    <a class="btn btn-secondary btn-sm icon-left" href="{{ route('dashboard') }}"><i class="ti-home"></i>Kembali</a>
                                 </div>
 
                             </dv>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table" id="data">
+                            {{-- <table class="table" id="data">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -63,7 +63,8 @@
                                     </tr>
                                     @endforeach
                                 </tbody>
-                            </table>
+                            </table> --}}
+                            {{ $dataTable->table() }}
                         </div>
                     </div>
                 </div>
@@ -72,3 +73,13 @@
     </div>
 </div>   
 @endsection
+
+@push('css')
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery.dataTables.min.css') }}">
+@endpush
+
+@push('js')
+    <script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+@endpush

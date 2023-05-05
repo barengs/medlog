@@ -28,7 +28,7 @@ Route::group(['prefix' => 'pengguna'], function () {
     Route::get('tambah', [UserProfileController::class, 'create'])->name('pengguna.tambah');
     Route::post('simpan', [UserProfileController::class, 'store'])->name('pengguna.simpan');
     Route::get('ubah/{id}', [UserProfileController::class, 'edit'])->name('pengguna.ubah');
-    Route::patch('ganti/{id}', [UserProfileController::class, 'update'])->name('pengguna.ganti');
+    Route::put('ganti/{id}', [UserProfileController::class, 'update'])->name('pengguna.ganti');
     Route::delete('hapus/{id}', [UserProfileController::class, 'destroy'])->name('pengguna.hapus');
 });
 
@@ -37,7 +37,7 @@ Route::group(['prefix' => 'jabatan'], function () {
     Route::get('tambah', [PositionController::class, 'create'])->name('jabatan.tambah');
     Route::post('simpan', [PositionController::class, 'store'])->name('jabatan.simpan');
     Route::get('ubah/{id}', [PositionController::class, 'edit'])->name('jabatan.ubah');
-    Route::patch('ganti/{id}', [PositionController::class, 'update'])->name('jabatan.ganti');
+    Route::put('ganti/{id}', [PositionController::class, 'update'])->name('jabatan.ganti');
     Route::delete('hapus/{id}', [PositionController::class, 'destroy'])->name('jabatan.hapus');
 });
 
@@ -52,11 +52,11 @@ Route::group(['prefix' => 'obat'], function () {
 });
 
 Route::group(['prefix' => 'kategori-obat'], function () {
-    Route::get('semua', [KategoriObatController::class, 'index'])->name('kategori.semua');
+    Route::get('semua', [KategoriObatController::class, 'index'])->name('kategori.index');
     Route::get('tambah', [KategoriObatController::class, 'create'])->name('kategori.tambah');
     Route::post('simpan', [KategoriObatController::class, 'store'])->name('kategori.simpan');
     Route::get('ubah/{id}', [KategoriObatController::class, 'edit'])->name('kategori.ubah');
-    Route::patch('ganti/{id}', [KategoriObatController::class, 'update'])->name('kategori.ganti');
+    Route::put('ubah/{id}/ganti', [KategoriObatController::class, 'update'])->name('kategori.ganti');
     Route::delete('hapus/{id}', [KategoriObatController::class, 'destroy'])->name('kategori.hapus');
 });
 
@@ -65,7 +65,7 @@ Route::group(['prefix' => 'pasien'], function () {
     Route::get('tambah', [PasienController::class, 'create'])->name('pasien.tambah');
     Route::post('simpan', [PasienController::class, 'store'])->name('pasien.simpan');
     Route::get('ubah/{id}', [PasienController::class, 'edit'])->name('pasien.ubah');
-    Route::patch('ganti/{id}', [PasienController::class, 'update'])->name('pasien.ganti');
+    Route::put('ganti/{id}', [PasienController::class, 'update'])->name('pasien.ganti');
     Route::delete('hapus/{id}', [PasienController::class, 'destroy'])->name('pasien.hapus');
 });
 

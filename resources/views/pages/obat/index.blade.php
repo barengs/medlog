@@ -28,7 +28,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table" id="data">
+                            {{-- <table class="table" id="data">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -39,9 +39,9 @@
                                         <th class="text-center" scope="col">Aksi</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody> --}}
                                     {{-- perhatikan disini --}}
-                                    @if ($data)
+                                    {{-- @if ($data)
                                     @foreach ($data as $item)
                                     <tr>
                                         <th scope="row">1</th>
@@ -60,7 +60,8 @@
                                     @endforeach
                                     @endif
                                 </tbody>
-                            </table>
+                            </table> --}}
+                            {{ $dataTable->table() }}
                         </div>
                     </div>
                 </div>
@@ -69,3 +70,13 @@
     </div>
 </div>   
 @endsection
+
+@push('css')
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery.dataTables.min.css') }}">
+@endpush
+
+@push('js')
+    <script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+@endpush

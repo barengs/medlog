@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ObatDataTable;
 use App\Models\Obat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -11,10 +12,10 @@ class ObatController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ObatDataTable $dataTable)
     {
         $data = Obat::all();
-        return view('pages.obat.index', compact('data'));
+        return $dataTable->render('pages.obat.index');
     }
 
     /**
