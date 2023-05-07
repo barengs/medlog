@@ -51,17 +51,26 @@ class PositionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Position $position)
+    public function edit($id)
     {
-        //
+        $data = Position::findOrFail($id);
+        return view('pages.jabatan.edit', compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Position $position)
+    public function update(Request $request, $id)
     {
-        //
+        $data = Position::findOrFail($id);
+
+        $data->nama = $request->nama;
+        $data->status = $request->status;
+        $data->update();
+
+        if ($data) {
+            return redirect()->route('jabatan.semua');
+        }
     }
 
     /**
