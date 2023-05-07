@@ -39,6 +39,7 @@ class ObatController extends Controller
             'kadaluwarsa' => Carbon::parse($request->kadaluwarsa)->format('Y/m/d'),
         ]);
         if ($input) {
+            toastr()->success('Data berhasil disimpan!');
             return redirect()->route('obat.semua');
         } else {
             return back()->withInput();
@@ -80,6 +81,8 @@ class ObatController extends Controller
         $data->update();
 
         if ($data) {
+            toastr()->success('Data berhasil diubah!');
+
             return redirect()->route('obat.semua');
         } else {
             return back()->withInput();

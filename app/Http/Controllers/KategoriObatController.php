@@ -33,6 +33,8 @@ class KategoriObatController extends Controller
             'nama' => $request->nama,
         ]);
         if ($save) {
+            toastr()->success('Data berhasil disimpan!');
+
             return redirect()->route('kategori.semua');
         } else {
             return back()->withInput();
@@ -67,6 +69,8 @@ class KategoriObatController extends Controller
         $data->update();
 
         if ($data) {
+            toastr()->success('Data berhasil diubah!');
+
             return redirect()->route('ketegori.semua');
         } else {
             return back()->withInput();

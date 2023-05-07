@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserProfileController extends Controller
 {
@@ -33,7 +35,31 @@ class UserProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // membuat akun baru
+        $user = User::create([
+            'name' => $request->kata_kunci,
+            'password' => bcrypt('password'),
+            'email' => $request->email,
+        ]);
+        // membuat profil baru
+        if ($user) {
+            $profil = UserProfile::create([
+                'user_id' => $user->id,
+                'nama_depan' => $request->nama_depan,
+                'nama_belakang' => $request->nama_belakang,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'no_handphone' => $request->no_handphone,
+                'no_ktp' => $request->no_ktp,
+            ]);
+
+            if ($profil) {
+                return redirect()->route('karyawan.semua');
+            } else {
+                return back()->withInput();
+            }
+        }
     }
 
     /**

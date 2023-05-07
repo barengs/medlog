@@ -34,6 +34,8 @@ class PositionController extends Controller
         ]);
 
         if ($save) {
+            toastr()->success('Data berhasil disimpan!');
+
             return redirect()->route('jabatan.semua');
         } else {
             return back()->withInput();
@@ -69,6 +71,7 @@ class PositionController extends Controller
         $data->update();
 
         if ($data) {
+            toastr()->success('Data berhasil di ubah!');
             return redirect()->route('jabatan.semua');
         }
     }
