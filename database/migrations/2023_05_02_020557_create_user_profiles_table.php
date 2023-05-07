@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('nama_depan');
             $table->string('nama_belakang')->nullable();
+            $table->enum('jenis_kelamin', ['pria', 'wanita'])->default('pria');
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->string('alamat');

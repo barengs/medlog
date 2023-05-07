@@ -12,7 +12,8 @@ class PositionController extends Controller
      */
     public function index()
     {
-        return view('pages.jabatan.index');
+        $data = Position::all();
+        return view('pages.jabatan.index', compact('data'));
     }
 
     /**
@@ -28,7 +29,15 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $save = Position::create([
+            'nama' => $request->nama
+        ]);
+
+        if ($save) {
+            return redirect()->route('jabatan.semua');
+        } else {
+            return back()->withInput();
+        }
     }
 
     /**

@@ -14,7 +14,13 @@ class PositionSeeder extends Seeder
     public function run(): void
     {
         Position::create([
-                'nama' => 'Admin',
-            ]);
+            'nama' => 'Admin',
+        ]);
+        Position::create([
+            'nama' => 'Perawat',
+        ]);
+        Position::create([
+            'nama' => 'Dokter',
+        ]);
     }
 }

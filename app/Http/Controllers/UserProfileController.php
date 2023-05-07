@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserProfileController extends Controller
 {
@@ -12,7 +13,11 @@ class UserProfileController extends Controller
      */
     public function index()
     {
-        return view('pages.karyawan.index');
+        $data = DB::table('user_profiles as us')
+            ->join('users as u', 'u.id', '=', 'us.user_id')
+            ->select('us.id', 'us.nama_depan', 'us.nama_belakang', 'us.jenis_kelamin', 'us.tempat_lahir', 'us.tanggal_lahir')
+            ->get();
+        return view('pages.karyawan.index', compact('data'));
     }
 
     /**

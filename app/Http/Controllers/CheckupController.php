@@ -20,7 +20,7 @@ class CheckupController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.checkup.add');
     }
 
     /**

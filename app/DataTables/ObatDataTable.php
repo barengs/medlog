@@ -84,6 +84,8 @@ class ObatDataTable extends DataTable
             Column::make('kadaluwarsa')
                 ->title('Tanggal Kadaluwarsa')
                 ->addClass('text-center'),
+            Column::make('stok')
+                ->addClass('text-center'),
             Column::make('created_at')
                 ->addClass('text-center')
                 ->title('Tanggal Pencatatan'),

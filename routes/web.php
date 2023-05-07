@@ -22,14 +22,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::group(['prefix' => 'pengguna'], function () {
-    Route::get('semua', [UserProfileController::class, 'index'])->name('pengguna.semua');
-    Route::get('lihat/{id}', [UserProfileController::class, 'show'])->name('pengguna.lihat');
-    Route::get('tambah', [UserProfileController::class, 'create'])->name('pengguna.tambah');
-    Route::post('simpan', [UserProfileController::class, 'store'])->name('pengguna.simpan');
-    Route::get('ubah/{id}', [UserProfileController::class, 'edit'])->name('pengguna.ubah');
-    Route::put('ganti/{id}', [UserProfileController::class, 'update'])->name('pengguna.ganti');
-    Route::delete('hapus/{id}', [UserProfileController::class, 'destroy'])->name('pengguna.hapus');
+Route::group(['prefix' => 'karyawan'], function () {
+    Route::get('semua', [UserProfileController::class, 'index'])->name('karyawan.semua');
+    Route::get('lihat/{id}', [UserProfileController::class, 'show'])->name('karyawan.lihat');
+    Route::get('tambah', [UserProfileController::class, 'create'])->name('karyawan.tambah');
+    Route::post('simpan', [UserProfileController::class, 'store'])->name('karyawan.simpan');
+    Route::get('ubah/{id}', [UserProfileController::class, 'edit'])->name('karyawan.ubah');
+    Route::put('ganti/{id}', [UserProfileController::class, 'update'])->name('karyawan.ganti');
+    Route::delete('hapus/{id}', [UserProfileController::class, 'destroy'])->name('karyawan.hapus');
 });
 
 Route::group(['prefix' => 'jabatan'], function () {

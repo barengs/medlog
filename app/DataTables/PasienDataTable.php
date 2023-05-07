@@ -27,6 +27,9 @@ class PasienDataTable extends DataTable
                 $edit = '<a class="btn btn-warning btn-sm icon-left" href="ubah/' . $data->id . '"><i class="ti-pencil-alt"></i>Ubah</a>';
                 return '<div class="btn-group">' . $history . $edit . '</div>';
             })
+            ->addColumn('nama', function ($data) {
+                return $data->nama_depan . ' ' . $data->nama_belakang;
+            })
             ->addIndexColumn();
     }
 
@@ -66,9 +69,9 @@ class PasienDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('DT_RowIndex')->title('#'),
+            Column::make('DT_RowIndex')->title('#')->searchable(false),
             Column::make('no_pasien'),
-            Column::make('nama_depan'),
+            Column::make('nama'),
             Column::make('jenis_kelamin'),
             Column::make('no_ktp'),
             Column::make('no_hp'),
