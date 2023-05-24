@@ -35,8 +35,9 @@ class KategoriObatController extends Controller
         if ($save) {
             toastr()->success('Data berhasil disimpan!');
 
-            return redirect()->route('kategori.semua');
+            return redirect()->route('kategori.index');
         } else {
+            toastr()->error('Gagal!', 'Penyimpanan data gagal, periksa kembali.');
             return back()->withInput();
         }
     }
@@ -71,8 +72,9 @@ class KategoriObatController extends Controller
         if ($data) {
             toastr()->success('Data berhasil diubah!');
 
-            return redirect()->route('ketegori.semua');
+            return redirect()->route('ketegori.index');
         } else {
+            toastr()->error('Gagal!', 'Perubahan data gagal, periksa kembali.');
             return back()->withInput();
         }
     }
@@ -80,8 +82,19 @@ class KategoriObatController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(KategoriObat $kategoriObat)
+    public function destroy($id)
     {
-        //
+        $del = KategoriObat::where('id', $id)->delete();
+        if ($del) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Hapus data Kategori Obat berhasil!',
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Hapus data Kategori Obat Gagal!',
+            ]);
+        }
     }
 }

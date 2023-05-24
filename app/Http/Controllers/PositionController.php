@@ -38,6 +38,7 @@ class PositionController extends Controller
 
             return redirect()->route('jabatan.semua');
         } else {
+            toastr()->error('Gagal!', 'Penyimpanan data gagal, periksa kembali.');
             return back()->withInput();
         }
     }
@@ -73,6 +74,9 @@ class PositionController extends Controller
         if ($data) {
             toastr()->success('Data berhasil di ubah!');
             return redirect()->route('jabatan.semua');
+        } else {
+            toastr()->error('Gagal!', 'Perubahan data gagal, periksa kembali.');
+            return back()->withInput();
         }
     }
 

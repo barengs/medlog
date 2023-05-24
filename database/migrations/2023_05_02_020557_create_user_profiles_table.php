@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('no_handphone');
             $table->string('no_ktp')->nullable();
+            $table->text('foto')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ObatDataTable;
+use App\Models\KategoriObat;
 use App\Models\Obat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -23,7 +24,8 @@ class ObatController extends Controller
      */
     public function create()
     {
-        return view('pages.obat.add');
+        $data = KategoriObat::all();
+        return view('pages.obat.add', compact('data'));
     }
 
     /**
@@ -42,6 +44,7 @@ class ObatController extends Controller
             toastr()->success('Data berhasil disimpan!');
             return redirect()->route('obat.semua');
         } else {
+            toastr()->error('Gagal!', 'Penyimpanan data gagal, periksa kembali.');
             return back()->withInput();
         }
     }
@@ -85,6 +88,7 @@ class ObatController extends Controller
 
             return redirect()->route('obat.semua');
         } else {
+            toastr()->error('Gagal!', 'Perubahan data gagal, periksa kembali.');
             return back()->withInput();
         }
     }
@@ -92,8 +96,19 @@ class ObatController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Obat $obat)
+    public function destroy($id)
     {
-        //
+        $del = Obat::where('id', $id)->delete();
+        if ($del) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Hapus data Obat berhasil!',
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Hapus data Obat Gagal!',
+            ]);
+        }
     }
 }

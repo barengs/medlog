@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Dashboard &mdash; Arfa</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
         integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
@@ -27,7 +28,7 @@
     <div id="app">
         <div class="shadow-header"></div>
         @include('pages.header')
-        @include('pages.menu')       
+        @include('pages.menu')
         @yield('content')
 
         <div class="settings">
@@ -62,13 +63,13 @@
                             <label for="">Theme Color</label>
                             <div>
                                 <div class="form-check form-check-inline lg">
-                                    <input class="form-check-input lg theme-color" type="radio" name="ThemeColor" id="light"
-                                        value="light">
+                                    <input class="form-check-input lg theme-color" type="radio" name="ThemeColor"
+                                        id="light" value="light">
                                     <label class="form-check-label" for="light">Light</label>
                                 </div>
                                 <div class="form-check form-check-inline lg">
-                                    <input class="form-check-input lg theme-color" type="radio" name="ThemeColor" id="dark"
-                                        value="dark">
+                                    <input class="form-check-input lg theme-color" type="radio" name="ThemeColor"
+                                        id="dark" value="dark">
                                     <label class="form-check-label" for="dark">Dark</label>
                                 </div>
 
@@ -86,10 +87,11 @@
                     </li>
                 </ul>
             </div>
-        </div> 
+        </div>
 
         <footer>
-            Copyright © 2022 &nbsp <a href="https://www.youtube.com/c/mulaidarinull" target="_blank" class="ml-1"> Mulai Dari Null </a> <span> . All rights Reserved</span>
+            Copyright © 2022 &nbsp <a href="https://www.youtube.com/c/mulaidarinull" target="_blank" class="ml-1">
+                Mulai Dari Null </a> <span> . All rights Reserved</span>
         </footer>
         <div class="overlay action-toggle">
         </div>

@@ -24,7 +24,7 @@ class KategoriObatDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($data) {
                 $edit = '<a class="btn btn-sm btn-warning icon-left" href="ubah/' . $data->id . '"><i class="ti-pencil-alt"></i>Ubah</a>';
-                $delete = '<a class="btn btn-sm btn-danger icon-left" href="hapus/' . $data->id . '"><i class="ti-trash"></i>Hapus</a>';
+                $delete = '<a class="btn btn-sm btn-danger icon-left" id="delete" data-url="hapus/' . $data->id . '" data-id="' . $data->id . '" href="javascript:void(0)"><i class="ti-trash"></i>Hapus</a>';
 
                 return '<div class="btn-group">' . $edit . $delete . '</div>';
             })
