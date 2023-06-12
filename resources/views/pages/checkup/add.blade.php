@@ -35,7 +35,7 @@
                                 <div class="mb-3">
                                     <label for="cari" class="form-label">Nomor KTP atau Anggota</label>
                                     <input type="text" name="cari" id="cari" class="form-control"
-                                        placeholder="tulis nomor ktp atau nomor anggota">
+                                        placeholder="tulis nomor ktp atau nomor anggota" required>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                             <div id="kotak" class="row">
                                 <div class="col-md-8">
                                     <input class="form-control" type="text" name="keluhan[]" id="keluhan"
-                                        placeholder="Tulis keluhan pasien disini..">
+                                        placeholder="Tulis keluhan pasien disini.." required>
                                 </div>
                                 <div class="col-md-1">
                                     <input class="form-control" type="number" name="lama_keluhan[]" id="lama_keluhan"

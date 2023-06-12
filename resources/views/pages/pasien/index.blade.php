@@ -39,7 +39,21 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                {{ $dataTable->table() }}
+                                {{-- {{ $dataTable->table() }} --}}
+                                <table class="table table-bordered data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>No Anggota</th>
+                                            <th>Nama Lengkap</th>
+                                            <th>Jenis Kelamin</th>
+                                            <th>No KTP</th>
+                                            <th>No Kontak</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -56,5 +70,52 @@
 @push('js')
     <script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+    {{-- {{ $dataTable->scripts(attributes: ['type' => 'module']) }} --}}
+    <script type="text/javascript">
+        $(function() {
+            $('.data-table').DataTable({
+                processing: true,
+                serverSide: true,
+                "bDestroy": true,
+                ajax: "{{ route('pasien.semua') }}",
+                // dom: 'Bfrtip',
+                buttons: ['copy', 'excel', 'pdf'],
+                columns: [{
+                        data: 'DT_RowIndex',
+                        'orderable': false,
+                        'searchable': false,
+                        class: 'text-center'
+                    },
+                    {
+                        data: 'no_pasien',
+                        name: 'no_pasien'
+                    },
+                    {
+                        data: 'nama_lengkap',
+                        name: 'nama_lengkap'
+                    },
+                    {
+                        data: 'jenis_kelamin',
+                        name: 'jenis_kelamin'
+                    },
+                    {
+                        data: 'no_ktp',
+                        name: 'no_ktp'
+                    },
+                    {
+                        data: 'no_hp',
+                        name: 'no_hp',
+                        className: 'text-center',
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        className: 'text-center',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            })
+        })
+    </script>
 @endpush

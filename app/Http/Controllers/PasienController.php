@@ -9,16 +9,35 @@ use App\Models\Checkup;
 use App\Models\KeluhanPasien;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class PasienController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(PasienDataTable $dataTable)
+    public function index(Request $request)
     {
-        $data = Pasien::all();
-        return $dataTable->render('pages.pasien.index');
+        if ($request->ajax()) {
+            $query = Pasien::all();
+
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->addColumn('nama_lengkap', function ($q) {
+                    return $q->nama_depan . ' ' . $q->nama_belakang;
+                })
+                ->addColumn('action', function ($data) {
+                    $show = '<a class="btn btn-sm btn-info icon-left" href="lihat/' . $data->id . '"><i class="ti-eye"></i> Riwayat Medis</a>';
+                    $edit = '<a class="btn btn-sm btn-warning icon-left" href="ubah/' . $data->id . '"><i class="ti-eye"></i> Ubah</a>';
+
+                    return '<div class="btn-group">' . $show . $edit . '</div>';
+                })
+                ->rawColumns(['nama_lengkap', 'action'])
+                ->make(true);
+        }
+        return view('pages.pasien.index');
+        // $data = Pasien::all();
+        // return $dataTable->render('pages.pasien.index');
     }
 
     /**
@@ -58,13 +77,14 @@ class PasienController extends Controller
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,
             'tempat_lahir' => $request->tempat_lahir,
-            'tanggal_lahir' => $request->tanggal_lahir,
+            'tanggal_lahir' => Carbon::parse($request->tanggal_lahir)->format('Y/m/d'),
             'nama_kerabat' => $request->nama_kerabat,
             'jenis_kelamin_kerabat' => $request->jenis_kelamin_kerabat,
             'no_kontak_kerabat' => $request->no_kontak_kerabat,
         ]);
 
         if ($save) {
+            toastr()->success('Info', 'Data berhasil disimpan!');
             return redirect()->route('pasien.semua');
         } else {
             return back()->withInput();
@@ -120,9 +140,30 @@ class PasienController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pasien $pasien)
+    public function update(Request $request, $id)
     {
-        //
+        $pasien = Pasien::findOrFail($id);
+        if ($pasien) {
+            $pasien->nama_depan = $request->nama_depan;
+            $pasien->nama_belakang = $request->nama_belakang;
+            $pasien->tempat_lahir = $request->tempat_lahir;
+            $pasien->tanggal_lahir = Carbon::parse($request->tanggal_lahir)->format('Y/m/d');
+            $pasien->jenis_kelamin = $request->jenis_kelamin;
+            $pasien->alamat = $request->alamat;
+            $pasien->no_hp = $request->no_handphone;
+            $pasien->email = $request->email;
+            $pasien->nama_kerabat = $request->nama_famili;
+            $pasien->jenis_kelamin_kerabat = $request->jenis_kelamin_famili;
+            $pasien->no_kontak_kerabat = $request->kontak_famili;
+
+            if ($pasien->update()) {
+                toastr()->success('Data berhasil ubah!');
+                return redirect()->route('pasien.semua');
+            } else {
+                toastr()->error('Gagal!', 'Data gagal diubah!');
+                return redirect()->route('pasien.semua');
+            }
+        }
     }
 
     /**

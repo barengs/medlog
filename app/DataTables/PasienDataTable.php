@@ -28,7 +28,7 @@ class PasienDataTable extends DataTable
                 return '<div class="btn-group">' . $history . $edit . '</div>';
             })
             ->addColumn('nama', function ($data) {
-                return $data->nama_depan;
+                return $data->nama_depan . ' ' . $data->nama_belakang;
             })
             ->addIndexColumn();
     }

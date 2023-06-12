@@ -148,14 +148,14 @@
                     </div>
                     <div class="card-footer border">
                         <div class="ms-2">
-                            <button type="submit" class="btn icon-left btn-primary btn-sm float-end" disabled><i
+                            <button type="submit" class="btn icon-left btn-primary btn-sm float-end"><i
                                     class="ti-pencil-alt"></i>Simpan dan Periksa</button>
                         </div>
                         <div class="btn-group float-end me-2" role="group" aria-label="Basic mixed styles example">
                             <a class="btn icon-left btn-warning btn-sm" href="{{ route('pasien.semua') }}"><i
                                     class="ti-close"></i>Batal</a>
-                            <button type="submit" class="btn icon-left btn-primary btn-sm" disabled><i
-                                    class="ti-save"></i>Simpan Perubahan</button>
+                            <button type="submit" class="btn icon-left btn-primary btn-sm"><i class="ti-save"></i>Simpan
+                                Perubahan</button>
                         </div>
                     </div>
                 </div>
