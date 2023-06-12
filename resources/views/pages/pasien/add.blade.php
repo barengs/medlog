@@ -21,8 +21,8 @@
                     <div class="card-header border d-flex justify-content-between">
                         <h4>TAMBAH PASIEN</h4>
                         <div class="btn-group float-end" role="group" aria-label="Basic mixed styles example">
-                            <a class="btn icon-left btn-warning btn-sm" href="{{ route('pasien.semua') }}"><i
-                                    class="ti-close"></i>Batal</a>
+                            <a class="btn icon-left btn-warning btn-sm" onclick="window.history.back()"
+                                href="javascript:void(0)"><i class="ti-close"></i>Batal</a>
                             <button type="submit" class="btn icon-left btn-primary btn-sm" disabled><i
                                     class="ti-save"></i>Simpan</button>
                         </div>
@@ -34,7 +34,7 @@
                                 <div class="mb-3">
                                     <label for="no_ktp" class="form-label">KTP</label>
                                     <input type="text" name="no_ktp" placeholder="masukan nomor KTP"
-                                        class="form-control" id="no_ktp">
+                                        class="form-control" id="no_ktp" autofocus>
                                 </div>
 
                             </div>
@@ -113,7 +113,7 @@
                                 <div class="mb-3">
                                     <label for="basicInput" class="form-label">Nama Kerabat</label>
                                     <small class="text-muted">(bila ada)</small>
-                                    <input type="text" name="nama_famili" placeholder="isi nama kerabat"
+                                    <input type="text" name="nama_kerabat" placeholder="isi nama kerabat"
                                         class="form-control" id="basicInput">
                                 </div>
                             </div>
@@ -121,7 +121,7 @@
                                 <div class="mb-3">
                                     <label for="basicInput" class="form-label">Jenis Kelamin</label>
                                     <small class="text-muted">(bila ada)</small>
-                                    <select id="status" name="jenis_kelamin_famili"
+                                    <select id="status" name="jenis_kelamin_kerabat"
                                         class="js-example-basic-single form-select">
                                         <option value="pria">Pria</option>
                                         <option value="wanita">Wanita</option>
@@ -132,7 +132,7 @@
                                 <div class="mb-3">
                                     <label for="basicInput" class="form-label">Nomor Kontak</label>
                                     <small class="text-muted">(bila ada)</small>
-                                    <input type="text" name="kontak_famili" placeholder="isi nama kerabat"
+                                    <input type="text" name="no_kontak_kerabat" placeholder="isi nama kerabat"
                                         class="form-control" id="basicInput">
                                 </div>
                             </div>
@@ -144,8 +144,8 @@
                                     class="ti-pencil-alt"></i>Simpan dan Periksa</button>
                         </div>
                         <div class="btn-group float-end me-2" role="group" aria-label="Basic mixed styles example">
-                            <a class="btn icon-left btn-warning btn-sm" href="{{ route('pasien.semua') }}"><i
-                                    class="ti-close"></i>Batal</a>
+                            <a class="btn icon-left btn-warning btn-sm" onclick="window.history.back()"
+                                href="javascript:void(0)"><i class="ti-close"></i>Batal</a>
                             <button type="submit" class="btn icon-left btn-primary btn-sm" disabled><i
                                     class="ti-save"></i>Simpan</button>
                         </div>
@@ -171,7 +171,7 @@
         });
 
         $(document).ready(function() {
-            $('#alamat').on('keyup', function() {
+            $('#alamat').on('input', function() {
                 let ktp = $('#no_ktp').val();
                 let nama = $('#nama_depan');
                 let tempat = $('#tampat_lahir').val();

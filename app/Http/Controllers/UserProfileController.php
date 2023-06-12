@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
@@ -15,10 +16,11 @@ class UserProfileController extends Controller
      */
     public function index()
     {
-        $data = DB::table('user_profiles as us')
-            ->join('users as u', 'u.id', '=', 'us.user_id')
-            ->select('us.id', 'us.nama_depan', 'us.nama_belakang', 'us.jenis_kelamin', 'us.tempat_lahir', 'us.tanggal_lahir')
-            ->get();
+        $data = User::with('profile')->get();
+        // $data = DB::table('user_profiles as us')
+        //     ->join('users as u', 'u.id', '=', 'us.user_id')
+        //     ->select('us.id', 'us.nama_depan', 'us.nama_belakang', 'us.jenis_kelamin', 'us.tempat_lahir', 'us.tanggal_lahir')
+        //     ->get();
         return view('pages.karyawan.index', compact('data'));
     }
 
@@ -37,7 +39,7 @@ class UserProfileController extends Controller
     {
         // membuat akun baru
         $user = User::create([
-            'name' => $request->kata_kunci,
+            'name' => 'karyawan',
             'password' => bcrypt('password'),
             'email' => $request->email,
         ]);
@@ -48,9 +50,10 @@ class UserProfileController extends Controller
                 'nama_depan' => $request->nama_depan,
                 'nama_belakang' => $request->nama_belakang,
                 'tempat_lahir' => $request->tempat_lahir,
-                'tanggal_lahir' => $request->tanggal_lahir,
+                'tanggal_lahir' => Carbon::parse($request->tanggal_lahir)->format('Y/m/d'),
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'no_handphone' => $request->no_handphone,
+                'alamat' => $request->alamat,
                 'no_ktp' => $request->no_ktp,
             ]);
 
@@ -65,17 +68,23 @@ class UserProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(UserProfile $userProfile)
+    public function show($id)
     {
-        //
+        $data = User::with('profile')->where('id', $id)->first();
+        if ($data) {
+            return view('pages.karyawan.show', compact('data'));
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UserProfile $userProfile)
+    public function edit($id)
     {
-        //
+        $data = User::with('profile')->where('id', $id)->first();
+        if ($data) {
+            return view('pages.karyawan.edit', compact('data'));
+        }
     }
 
     /**

@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('checkups', function (Blueprint $table) {
             $table->id();
+            $table->string('antrian')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('pasien_id');
-            $table->enum('penanganan', ['rawat inap', 'rawat jalan', 'rawat mandiri']);
-            $table->string('keterangan');
+            $table->enum('penanganan', ['rujuk', 'rawat inap', 'rawat jalan', 'rawat mandiri'])->nullable();
+            $table->string('keterangan')->nullable();
+            $table->enum('status', ['open', 'proses', 'selesai'])->default('open');
             $table->timestamps();
             $table->softDeletes();
 

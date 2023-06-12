@@ -10,7 +10,7 @@ class UserProfile extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['user_id', 'nama_depan', 'nama_belakang', 'tempat_lahir', 'alamat', 'tanggal_lahir', 'no_ktp', 'no_handphone'];
+    protected $fillable = ['user_id', 'nama_depan', 'nama_belakang', 'tempat_lahir', 'alamat', 'tanggal_lahir', 'no_ktp', 'no_handphone', 'foto'];
 
     public function user()
     {

@@ -62,19 +62,22 @@ Route::group(['prefix' => 'kategori-obat'], function () {
 
 Route::group(['prefix' => 'pasien'], function () {
     Route::get('semua', [PasienController::class, 'index'])->name('pasien.semua');
+    Route::get('lihat/{id}', [PasienController::class, 'show'])->name('pasien.lihat');
     Route::get('tambah', [PasienController::class, 'create'])->name('pasien.tambah');
     Route::post('simpan', [PasienController::class, 'store'])->name('pasien.simpan');
     Route::get('ubah/{id}', [PasienController::class, 'edit'])->name('pasien.ubah');
     Route::put('ganti/{id}', [PasienController::class, 'update'])->name('pasien.ganti');
     Route::delete('hapus/{id}', [PasienController::class, 'destroy'])->name('pasien.hapus');
+    Route::get('{id}/cari', [PasienController::class, 'cari'])->name('pasien.cari');
 });
 
 Route::group(['prefix' => 'checkup'], function () {
     Route::get('semua', [CheckupController::class, 'index'])->name('checkup.semua');
     Route::get('lihat/{id}', [CheckupController::class, 'show'])->name('checkup.lihat');
     Route::get('tambah', [CheckupController::class, 'create'])->name('checkup.tambah');
+    Route::get('proses/{id}', [CheckupController::class, 'edit'])->name('checkup.proses');
     Route::post('simpan', [CheckupController::class, 'store'])->name('checkup.simpan');
     Route::get('ubah/{id}', [CheckupController::class, 'edit'])->name('checkup.ubah');
-    Route::patch('ganti/{id}', [CheckupController::class, 'update'])->name('checkup.ganti');
+    Route::put('ganti/{id}', [CheckupController::class, 'update'])->name('checkup.ganti');
     Route::delete('hapus/{id}', [CheckupController::class, 'destroy'])->name('checkup.hapus');
 });

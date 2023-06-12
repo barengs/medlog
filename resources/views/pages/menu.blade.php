@@ -29,8 +29,10 @@
                     <span>Pemeriksaan</span>
                 </a>
                 <ul class="sub-menu {{ Request::is('checkup/*', 'pasien/*') ? 'expand' : '' }}">
-                    <li class="{{ Request::is('checkup/*') ? 'active' : '' }}"><a href="/checkup/tambah"
-                            class="link"><span>Rekam Medis</span></a></li>
+                    <li class="{{ Request::is('checkup/*') ? 'active' : '' }}"><a href="/checkup/semua"
+                            class="link"><span>Pendaftaran</span></a></li>
+                    <li class="{{ Request::is('checkup/proses') ? 'active' : '' }}"><a href="/checkup/proses"
+                            class="link"><span>Pemeriksaan</span></a></li>
                     <li class="{{ Request::is('pasien/*') ? 'active' : '' }}"><a href="/pasien/semua"
                             class="link"><span>Riwayat Pasien</span></a></li>
                 </ul>

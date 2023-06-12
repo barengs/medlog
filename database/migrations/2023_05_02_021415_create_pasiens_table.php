@@ -19,8 +19,14 @@ return new class extends Migration
             $table->enum('jenis_kelamin', ['pria', 'wanita']);
             $table->string('no_ktp');
             $table->string('alamat');
+            $table->string('tempat_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
+            $table->string('email')->nullable();
             $table->string('no_hp')->nullable();
             $table->unsignedBigInteger('village_id')->nullable();
+            $table->string('nama_kerabat')->nullable();
+            $table->enum('jenis_kelamin_kerabat', ['pria', 'wanita']);
+            $table->string('no_kontak_kerabat')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

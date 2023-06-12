@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Pasien;
 use Illuminate\Http\Request;
 use App\DataTables\PasienDataTable;
+use App\Models\Checkup;
+use App\Models\KeluhanPasien;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -40,10 +42,16 @@ class PasienController extends Controller
         ]);
 
         $lastData = DB::table('pasiens')->latest()->first();
-        $noPasien = $lastData->no_pasien;
+        if ($lastData->no_pasien) {
+            $noPasien = $this->createNumber($lastData->no_pasien);
+        } else {
+            $noPasien = 'P001' . date('mY', strtotime(Carbon::now()));
+        }
+
+        // dd($request->all());
 
         $save = Pasien::create([
-            'no_pasien' => $this->createNumber($noPasien),
+            'no_pasien' => $noPasien,
             'nama_depan' => $request->nama_depan,
             'nama_belakang' => $request->nama_belakang,
             'no_ktp' => $request->no_ktp,
@@ -51,6 +59,9 @@ class PasienController extends Controller
             'alamat' => $request->alamat,
             'tempat_lahir' => $request->tempat_lahir,
             'tanggal_lahir' => $request->tanggal_lahir,
+            'nama_kerabat' => $request->nama_kerabat,
+            'jenis_kelamin_kerabat' => $request->jenis_kelamin_kerabat,
+            'no_kontak_kerabat' => $request->no_kontak_kerabat,
         ]);
 
         if ($save) {
@@ -69,11 +80,41 @@ class PasienController extends Controller
     }
 
     /**
+     * Cari pasien berdasarkan nomor KTP atau Anggota
+     */
+    public function cari($id)
+    {
+        $data = Pasien::where('no_ktp', $id)->orWhere('no_pasien', $id)->first();
+        $check = Checkup::where('pasien_id', $data->id)->first();
+        if ($data) {
+            $riwayat = DB::table('keluhan_pasiens as kp')
+                ->join('checkups as c', 'c.id', '=', 'kp.checkup_id')
+                // ->join('hasil_diagnosas as hd', 'hd.checkup_id', '=', 'c.id')
+                ->select('kp.checkup_id', 'kp.keluhan', 'kp.lama_keluhan', 'kp.satuan', 'kp.created_at')
+                ->where('c.pasien_id', $data->id)
+                ->get();
+
+            if ($riwayat) {
+                return response()->json(['status' => true, 'pasien' => $data, 'checkup' => $check, 'riwayat' => $riwayat]);
+            }
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'data tidak ditemukan'
+            ]);
+        }
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pasien $pasien)
+    public function edit($id)
     {
-        //
+        $data = Pasien::findOrFail($id);
+
+        if ($data) {
+            return view('pages.pasien.edit', compact('data'));
+        }
     }
 
     /**
@@ -95,24 +136,16 @@ class PasienController extends Controller
     public function createNumber($lastNumber)
     {
         //potong 4 karakter pertama
-        $startNum = substr($lastNumber, 4);
+        // $startNum = substr($lastNumber, 4);
         //ambil 3 karakter setelah karakter pertama
-        $codeStr = substr($startNum, 1, 3);
+        $oldnum = substr($lastNumber, 1, 3);
 
-        function getNumber($val)
-        {
-            if (is_numeric($val)) {
-                return $val + 0;
-            }
-            return 0;
-        }
-
-        // buat nomor baru
-        $newNum = getNumber($codeStr) + 1;
+        $newNum = substr($oldnum, 1, 3);
+        $docnum = 'P' . sprintf("%03d", $newNum + 1);
 
         // ambil tanggal sekarang
         $monthYear = date('mY', strtotime(Carbon::now()));
-        $newDocNum = 'P' . $newNum . $monthYear;
+        $newDocNum = $docnum . $monthYear;
         return $newDocNum;
     }
 }

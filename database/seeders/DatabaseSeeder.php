@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             PasienSeeder::class,
             KategoriObatSeeder::class,
             PositionSeeder::class,
+            CheckupSeeder::class,
         ]);
     }
 }

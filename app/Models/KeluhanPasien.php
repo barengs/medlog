@@ -9,4 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class KeluhanPasien extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $fillable = ['checkup_id', 'keluhan', 'lama_keluhan', 'satuan'];
+
+    public function checkup()
+    {
+        return $this->hasMany(Checkup::class);
+    }
 }

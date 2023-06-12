@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Pasien;
+use App\Models\Checkup;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class PasienDataTable extends DataTable
+class CheckupsDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -22,13 +22,25 @@ class PasienDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', function ($data) {
-                $history = '<a class="btn btn-info btn-sm icon-left" href="lihat/' . $data->id . '"><i class="ti-eye"></i>Riwayat</a>';
-                $edit = '<a class="btn btn-warning btn-sm icon-left" href="ubah/' . $data->id . '"><i class="ti-pencil-alt"></i>Ubah</a>';
-                return '<div class="btn-group">' . $history . $edit . '</div>';
+            ->addColumn('no_pasien', function ($data) {
+                return $data->pasien->no_pasien;
             })
             ->addColumn('nama', function ($data) {
-                return $data->nama_depan;
+                $nama_lengkap = $data->pasien->nama_depan;
+                return $nama_lengkap;
+            })
+            ->addColumn('no_ktp', function ($data) {
+                return $data->pasien->no_ktp;
+            })
+            ->addColumn('status', function ($data) {
+                if ($data->status == 'open') {
+                    return $data->status;
+                }
+            })
+            ->addColumn('action', function ($data) {
+                $show = '<a class="btn btn-sm btn-info icon-left" href="lihat/' . $data->id . '"><i class="ti-eye"></i> Proses</a>';
+
+                return '<div class="btn-group">' . $show . '</div>';
             })
             ->addIndexColumn();
     }
@@ -36,7 +48,7 @@ class PasienDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(Pasien $model): QueryBuilder
+    public function query(Checkup $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -47,7 +59,7 @@ class PasienDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('pasien-table')
+            ->setTableId('checkups-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
@@ -69,18 +81,17 @@ class PasienDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('DT_RowIndex')->title('#')->searchable(false),
-            Column::make('no_pasien'),
-            Column::make('nama')->searchable(true),
-            Column::make('jenis_kelamin'),
-            Column::make('no_ktp'),
-            Column::make('no_hp'),
-            // Column::make('created_at'),
-            // Column::make('updated_at'),
+            Column::make('DT_RowIndex')
+                ->title('#')
+                ->searchable(false),
+            Column::make('no_pasien')->title('Nomor Pasien'),
+            Column::make('nama')->title('Nama Lengkap'),
+            Column::make('no_ktp')->title('Nomor KTP'),
+            Column::make('status')->addClass('text-center'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->width(60)
+                // ->width(60)
                 ->addClass('text-center'),
         ];
     }
@@ -90,6 +101,6 @@ class PasienDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Pasien_' . date('YmdHis');
+        return 'Checkups_' . date('YmdHis');
     }
 }
