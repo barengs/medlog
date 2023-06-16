@@ -35,7 +35,7 @@ class KategoriObatController extends Controller
         if ($save) {
             toastr()->success('Data berhasil disimpan!');
 
-            return redirect()->route('kategori.index');
+            return redirect()->route('kategori.semua');
         } else {
             toastr()->error('Gagal!', 'Penyimpanan data gagal, periksa kembali.');
             return back()->withInput();
@@ -67,12 +67,10 @@ class KategoriObatController extends Controller
         $data = KategoriObat::findOrFail($id);
 
         $data->nama = $request->nama;
-        $data->update();
 
-        if ($data) {
+        if ($data->update()) {
             toastr()->success('Data berhasil diubah!');
-
-            return redirect()->route('ketegori.index');
+            return redirect()->route('kategori.semua');
         } else {
             toastr()->error('Gagal!', 'Perubahan data gagal, periksa kembali.');
             return back()->withInput();

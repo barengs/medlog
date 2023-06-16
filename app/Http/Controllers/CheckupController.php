@@ -21,7 +21,51 @@ class CheckupController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $query = Checkup::with('pasien')->whereNot('status', 'selesai')->get();
+            $query = Checkup::with('pasien')->get();
+
+            return DataTables::of($query)
+                ->addIndexColumn()
+                ->addColumn('no_pasien', function ($data) {
+                    return $data->pasien->no_pasien;
+                })
+                ->addColumn('nama', function ($data) {
+                    $nama_lengkap = $data->pasien->nama_depan . ' ' . $data->pasien->nama_belakang;
+                    return $nama_lengkap;
+                })
+                ->addColumn('no_ktp', function ($data) {
+                    return $data->pasien->no_ktp;
+                })
+                ->addColumn('status', function ($data) {
+                    $open = '<span class="badge bg-success">' . $data->status . '</span>';
+                    $proses = '<span class="badge bg-warning">' . $data->status . '</span>';
+                    $selesai = '<span class="badge bg-danger">' . $data->status . '</span>';
+                    if ($data->status == 'open') {
+                        return $open;
+                    } else if ($data->status == 'proses') {
+                        return $proses;
+                    } else if ($data->status == 'selesai') {
+                        return $selesai;
+                    }
+                })
+                ->addColumn('action', function ($data) {
+                    $show = '<a class="btn btn-sm btn-info icon-left" href="cetak/' . $data->id . '"><i class="ti-print"></i> Proses</a>';
+                    if ($data->status === 'proses') {
+                        return '<div class="btn-group">' . $show . '</div>';
+                    }
+                })
+                ->rawColumns(['no_pasien', 'nama', 'no_ktp', 'status', 'action'])
+                ->make(true);
+        }
+        return view('pages.checkup.index');
+    }
+
+    /**
+     * listing the resource where status is open
+     */
+    public function list(Request $request)
+    {
+        if ($request->ajax()) {
+            $query = Checkup::with('pasien')->where('status', 'open')->get();
 
             return DataTables::of($query)
                 ->addIndexColumn()
@@ -52,7 +96,7 @@ class CheckupController extends Controller
                 ->rawColumns(['no_pasien', 'nama', 'no_ktp', 'status', 'action'])
                 ->make(true);
         }
-        return view('pages.checkup.index');
+        return view('pages.checkup.list');
     }
 
     /**
@@ -115,17 +159,18 @@ class CheckupController extends Controller
      */
     public function edit($id)
     {
-        $data = Checkup::with('pasien')->where('id', $id)->first();
+        $data = Checkup::where('id', $id)->with('pasien')->with('keluhan')->with('diagnosa')->first();
         // $riwayat = Checkup::where('pasien_id', $data->pasien->id)->with('keluhan')->with('diagnosa')->get();
-        $riwayat = DB::table('keluhan_pasiens as kp')
-            ->join('checkups as c', 'c.id', '=', 'kp.checkup_id')
-            // ->join('hasil_diagnosas as hd', 'hd.checkup_id', '=', 'c.id')
-            ->select('kp.checkup_id', 'kp.keluhan', 'kp.lama_keluhan', 'kp.satuan', 'kp.created_at')
-            ->where('kp.checkup_id', $data->id)
-            ->get();
+        // dd($data);
+        // $riwayat = DB::table('keluhan_pasiens as kp')
+        //     ->join('checkups as c', 'c.id', '=', 'kp.checkup_id')
+        //     // ->join('hasil_diagnosas as hd', 'hd.checkup_id', '=', 'c.id')
+        //     ->select('kp.checkup_id', 'kp.keluhan', 'kp.lama_keluhan', 'kp.satuan', 'kp.created_at')
+        //     ->where('kp.checkup_id', $data->id)
+        //     ->get();
         $obat = Obat::all();
         // dd($riwayat);
-        return view('pages.checkup.antrian', compact(['data', 'riwayat', 'obat']));
+        return view('pages.checkup.antrian', compact(['data', 'obat']));
     }
 
     /**
@@ -134,7 +179,7 @@ class CheckupController extends Controller
     public function update(Request $request, $id)
     {
         $checkup = Checkup::findOrFail($id);
-        $checkup->status = 'selesai';
+        $checkup->status = 'proses';
         $checkup->penanganan = $request->penanganan;
         $checkup->keterangan = $request->keterangan;
 

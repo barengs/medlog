@@ -28,10 +28,10 @@
                     <i class="ti-desktop"></i>
                     <span>Pemeriksaan</span>
                 </a>
-                <ul class="sub-menu {{ Request::is('checkup/*', 'pasien/*') ? 'expand' : '' }}">
+                <ul class="sub-menu {{ Request::is('checkup/*', 'pasien/*', 'periksa/*') ? 'expand' : '' }}">
                     <li class="{{ Request::is('checkup/*') ? 'active' : '' }}"><a href="/checkup/semua"
                             class="link"><span>Pendaftaran</span></a></li>
-                    <li class="{{ Request::is('checkup/proses') ? 'active' : '' }}"><a href="/checkup/proses"
+                    <li class="{{ Request::is('periksa/*') ? 'active' : '' }}"><a href="{{ route('periksa.semua') }}"
                             class="link"><span>Pemeriksaan</span></a></li>
                     <li class="{{ Request::is('pasien/*') ? 'active' : '' }}"><a href="/pasien/semua"
                             class="link"><span>Riwayat Pasien</span></a></li>

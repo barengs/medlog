@@ -10,7 +10,7 @@
                 style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
                 aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('kategori.index') }}">Kategori Obat</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('kategori.semua') }}">Kategori Obat</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Tambah Data</li>
                 </ol>
             </nav>
@@ -22,7 +22,7 @@
                     <div class="card-header d-flex justify-content-between">
                         <h4>TAMBAH DATA</h4>
                         <div class="btn-group float-end" role="group" aria-label="Basic mixed styles example">
-                            <a class="btn icon-left btn-warning btn-sm" href="{{ route('kategori.index') }}"><i
+                            <a class="btn icon-left btn-warning btn-sm" href="{{ route('kategori.semua') }}"><i
                                     class="ti-close"></i>Batal</a>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="btn-group float-end" role="group" aria-label="Basic mixed styles example">
-                            <a class="btn icon-left btn-warning btn-sm" href="{{ route('kategori.index') }}"><i
+                            <a class="btn icon-left btn-warning btn-sm" href="{{ route('kategori.semua') }}"><i
                                     class="ti-close"></i>Batal</a>
                             <button type="submit" class="btn icon-left btn-primary btn-sm"><i
                                     class="ti-save"></i>Simpan</button>

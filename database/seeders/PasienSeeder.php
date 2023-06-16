@@ -16,7 +16,16 @@ class PasienSeeder extends Seeder
         Pasien::create([
             'no_pasien' => 'P001052023',
             'nama_depan' => 'Muhammad',
-            'nama_belakang' => 'Ali',
+            'nama_belakang' => 'Barick',
+            'jenis_kelamin' => 'pria',
+            'no_ktp' => '3528061508860001',
+            'alamat' => 'Jl. Raya Palengaan',
+        ]);
+
+        Pasien::create([
+            'no_pasien' => 'P002052023',
+            'nama_depan' => 'Badrus',
+            'nama_belakang' => 'Sabidil',
             'jenis_kelamin' => 'pria',
             'no_ktp' => '3528061508860001',
             'alamat' => 'Jl. Raya Palengaan',

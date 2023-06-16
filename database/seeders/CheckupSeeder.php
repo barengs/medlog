@@ -18,6 +18,15 @@ class CheckupSeeder extends Seeder
             'user_id' => 1,
             'pasien_id' => 1,
             'status' => 'open',
+            'penanganan' => 'rawat mandiri',
+        ]);
+
+        Checkup::create([
+            'antrian' => '002',
+            'user_id' => 1,
+            'pasien_id' => 2,
+            'penanganan' => 'rawat mandiri',
+            'status' => 'open',
         ]);
     }
 }

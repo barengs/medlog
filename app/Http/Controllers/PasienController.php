@@ -28,7 +28,7 @@ class PasienController extends Controller
                 })
                 ->addColumn('action', function ($data) {
                     $show = '<a class="btn btn-sm btn-info icon-left" href="lihat/' . $data->id . '"><i class="ti-eye"></i> Riwayat Medis</a>';
-                    $edit = '<a class="btn btn-sm btn-warning icon-left" href="ubah/' . $data->id . '"><i class="ti-eye"></i> Ubah</a>';
+                    $edit = '<a class="btn btn-sm btn-warning icon-left" href="ubah/' . $data->id . '"><i class="ti-pencil-alt"></i> Ubah</a>';
 
                     return '<div class="btn-group">' . $show . $edit . '</div>';
                 })
@@ -94,9 +94,16 @@ class PasienController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pasien $pasien)
+    public function show($id)
     {
-        return view('pages.pasien.show');
+        $data = Pasien::findOrFail($id);
+        $riwayat = DB::table('keluhan_pasiens as kp')
+            ->join('checkups as c', 'c.id', '=', 'kp.checkup_id')
+            // ->join('hasil_diagnosas as hd', 'hd.checkup_id', '=', 'c.id')
+            ->select('kp.checkup_id', 'kp.keluhan', 'kp.lama_keluhan', 'kp.satuan', 'kp.created_at')
+            ->where('c.pasien_id', $data->id)
+            ->get();
+        return view('pages.pasien.show', compact(['data', 'riwayat']));
     }
 
     /**
@@ -105,8 +112,8 @@ class PasienController extends Controller
     public function cari($id)
     {
         $data = Pasien::where('no_ktp', $id)->orWhere('no_pasien', $id)->first();
-        $check = Checkup::where('pasien_id', $data->id)->first();
         if ($data) {
+            $check = Checkup::where('pasien_id', $data->id)->first();
             $riwayat = DB::table('keluhan_pasiens as kp')
                 ->join('checkups as c', 'c.id', '=', 'kp.checkup_id')
                 // ->join('hasil_diagnosas as hd', 'hd.checkup_id', '=', 'c.id')

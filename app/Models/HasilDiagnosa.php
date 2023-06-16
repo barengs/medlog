@@ -14,6 +14,6 @@ class HasilDiagnosa extends Model
 
     public function checkup()
     {
-        return $this->hasMany(Checkup::class);
+        return $this->belongsTo(Checkup::class);
     }
 }

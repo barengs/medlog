@@ -56,15 +56,16 @@
                             <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="nama" class="form-label">Nama Lengkap</label>
-                                    <input type="text" value="{{ $data->pasien->nama_depan }}" name="nama"
-                                        class="form-control" id="nama" readonly>
+                                    <input type="text"
+                                        value="{{ $data->pasien->nama_depan . ' ' . $data->pasien->nama_belakang }}"
+                                        name="nama" class="form-control" id="nama" readonly>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="mb-3">
                                     <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                                    <input type="text" value="{{ $data->pasien->jenis_kelamin }}" name="jenis_kelamin"
-                                        class="form-control" id="jenis_kelamin" readonly>
+                                    <input type="text" value="{{ ucfirst($data->pasien->jenis_kelamin) }}"
+                                        name="jenis_kelamin" class="form-control" id="jenis_kelamin" readonly>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +95,7 @@
                             </div>
                         </div> --}}
                         <hr>
-                        <h5>Rekam Medis</h5>
+                        <h5>Riwayat Medis</h5>
                         <div class="row">
                             <div class="col-md-12">
                                 <table class="table table-bordered">
@@ -108,18 +109,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if (!$riwayat)
+                                        @if (!$data->keluhan)
                                             <tr>
                                                 <td colspan="3" class="text-center">--- Belum ada data ---</td>
                                             </tr>
                                         @else
-                                            @foreach ($riwayat as $item)
+                                            @foreach ($data->keluhan as $item)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $item->keluhan }}</td>
+                                                    <td>{{ ucfirst($item->keluhan) }}</td>
                                                     <td>{{ $item->lama_keluhan . ' ' . $item->satuan }}</td>
                                                     <td>{{ date('d M Y', strtotime($item->created_at)) }}</td>
-                                                    <td></td>
+                                                    <td>{{ $data->diagnosa->diagnosa }}</td>
                                                 </tr>
                                             @endforeach
                                         @endif

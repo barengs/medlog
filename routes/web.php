@@ -52,7 +52,7 @@ Route::group(['prefix' => 'obat'], function () {
 });
 
 Route::group(['prefix' => 'kategori-obat'], function () {
-    Route::get('semua', [KategoriObatController::class, 'index'])->name('kategori.index');
+    Route::get('semua', [KategoriObatController::class, 'index'])->name('kategori.semua');
     Route::get('tambah', [KategoriObatController::class, 'create'])->name('kategori.tambah');
     Route::post('simpan', [KategoriObatController::class, 'store'])->name('kategori.simpan');
     Route::get('ubah/{id}', [KategoriObatController::class, 'edit'])->name('kategori.ubah');
@@ -75,9 +75,13 @@ Route::group(['prefix' => 'checkup'], function () {
     Route::get('semua', [CheckupController::class, 'index'])->name('checkup.semua');
     Route::get('lihat/{id}', [CheckupController::class, 'show'])->name('checkup.lihat');
     Route::get('tambah', [CheckupController::class, 'create'])->name('checkup.tambah');
-    Route::get('proses/{id}', [CheckupController::class, 'edit'])->name('checkup.proses');
     Route::post('simpan', [CheckupController::class, 'store'])->name('checkup.simpan');
     Route::get('ubah/{id}', [CheckupController::class, 'edit'])->name('checkup.ubah');
     Route::put('ganti/{id}', [CheckupController::class, 'update'])->name('checkup.ganti');
     Route::delete('hapus/{id}', [CheckupController::class, 'destroy'])->name('checkup.hapus');
+});
+
+Route::group(['prefix' => 'periksa'], function () {
+    Route::get('semua', [CheckupController::class, 'list'])->name('periksa.semua');
+    Route::get('proses/{id}', [CheckupController::class, 'edit'])->name('periksa.proses');
 });

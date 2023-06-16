@@ -19,11 +19,11 @@ class Checkup extends Model
 
     public function keluhan()
     {
-        return $this->belongsTo(KeluhanPasien::class);
+        return $this->hasMany(KeluhanPasien::class);
     }
 
     public function diagnosa()
     {
-        return $this->belongsTo(HasilDiagnosa::class);
+        return $this->hasOne(HasilDiagnosa::class);
     }
 }
