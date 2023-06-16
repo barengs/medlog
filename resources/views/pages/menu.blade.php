@@ -23,18 +23,18 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-            <li class="{{ Request::is('checkup/*', 'pasien/*') ? 'open active' : '' }}">
+            <li class="{{ Request::is('checkup/*', 'pasien/*', 'periksa/*') ? 'open active' : '' }}">
                 <a href="#" class="main-menu has-dropdown">
                     <i class="ti-desktop"></i>
                     <span>Pemeriksaan</span>
                 </a>
                 <ul class="sub-menu {{ Request::is('checkup/*', 'pasien/*', 'periksa/*') ? 'expand' : '' }}">
                     <li class="{{ Request::is('checkup/*') ? 'active' : '' }}"><a href="/checkup/semua"
-                            class="link"><span>Pendaftaran</span></a></li>
+                            class="link"><span>Antrian</span></a></li>
                     <li class="{{ Request::is('periksa/*') ? 'active' : '' }}"><a href="{{ route('periksa.semua') }}"
                             class="link"><span>Pemeriksaan</span></a></li>
                     <li class="{{ Request::is('pasien/*') ? 'active' : '' }}"><a href="/pasien/semua"
-                            class="link"><span>Riwayat Pasien</span></a></li>
+                            class="link"><span>Pasien</span></a></li>
                 </ul>
             </li>
             <li class="{{ Request::is('obat/*', 'kategori-obat/*') ? 'open active' : '' }}">
