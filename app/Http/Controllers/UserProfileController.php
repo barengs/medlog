@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Position;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\UserProfile;
@@ -29,7 +30,8 @@ class UserProfileController extends Controller
      */
     public function create()
     {
-        return view('pages.karyawan.add');
+        $jabatan = Position::all();
+        return view('pages.karyawan.add', compact('jabatan'));
     }
 
     /**
@@ -98,8 +100,20 @@ class UserProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserProfile $userProfile)
+    public function destroy($id)
     {
-        //
+        $profil = UserProfile::findOrFail($id);
+        $delUser = User::where('id', $profil->user_id)->delete();
+        if ($delUser) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Hapus data Obat berhasil!',
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Hapus data Obat Gagal!',
+            ]);
+        }
     }
 }

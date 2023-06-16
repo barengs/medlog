@@ -22,7 +22,7 @@
                     <div class="card-header border d-flex justify-content-between">
                         <h4>TAMBAH DATA</h4>
                         <div class="btn-group float-end" role="group" aria-label="Basic mixed styles example">
-                            <a class="btn icon-left btn-warning btn-sm" href="{{ route('karyawan.semua') }}"><i
+                            <a class="btn icon-left btn-warning btn-sm" onclick="window.history.back()" href="javascript:void(0)"><i
                                     class="ti-close"></i>Batal</a>
                             <button type="submit" class="btn icon-left btn-primary btn-sm"><i
                                     class="ti-save"></i>Simpan</button>
@@ -35,7 +35,7 @@
                                 <div class="mb-3">
                                     <label for="basicInput" class="form-label">Nama Depan</label>
                                     <input type="text" name="nama_depan" placeholder="Tulis Nama depan"
-                                        class="form-control" id="basicInput">
+                                        class="form-control" id="basicInput" required>
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -52,14 +52,14 @@
                                 <div class="mb-3">
                                     <label for="basicInput" class="form-label">Tempat Lahir</label>
                                     <input type="tempat_lahir" name="tempat_lahir" placeholder="Tulis tempat lahir"
-                                        class="form-control" id="basicInput">
+                                        class="form-control" id="basicInput" required>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="mb-3">
-                                    <label for="withHelperTextBottom" class="form-label">Tanggal Lahir</label>
+                                    <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
                                     <input type="text" name="tanggal_lahir" class="form-control date"
-                                        id="withHelperTextBottom" aria-describedby="withHelperTextBottomHelp">
+                                        id="tanggal_lahir" aria-describedby="withHelperTextBottomHelp" required>
                                 </div>
                             </div>
 
@@ -67,9 +67,9 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="mb-3">
-                                    <label for="basicInput" class="form-label">E-Mail</label>
+                                    <label for="email" class="form-label">E-Mail</label>
                                     <input type="email" name="email" placeholder="Tulis alamat email"
-                                        class="form-control" id="basicInput">
+                                        class="form-control" id="email" required>
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -85,7 +85,7 @@
                             <div class="col-lg-4">
                                 <div class="mb-3">
                                     <label for="status" class="form-label">Jenis Kelamin</label>
-                                    <select id="status" name="jenis_kelamin" class="js-example-basic-single form-select">
+                                    <select id="status" name="jenis_kelamin" class="js-example-basic-single form-select" required>
                                         <option value="pria">Pria</option>
                                         <option value="wanita">Wanita</option>
                                     </select>
@@ -115,6 +115,16 @@
                                             class="form-control" id="basicInput">
                                     </div>
                                 </div>
+                                <div class="col-lg-4">
+                                    <div class="mb-3">
+                                        <label for="jabatan" class="form-label">Jabatan</label>
+                                        <select id="jabatan" name="jabatan" class="js-example-basic-single form-select">
+                                            @foreach ($jabatan as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -122,7 +132,7 @@
                     <div class="card-body border">
 
                         <div class="btn-group float-end" role="group">
-                            <a class="btn icon-left btn-warning btn-sm" href="{{ route('obat.semua') }}"><i
+                            <a class="btn icon-left btn-warning btn-sm" onclick="window.history.back()" href="javascript:void(0)"><i
                                     class="ti-close"></i>Batal</a>
                             <button type="submit" class="btn icon-left btn-primary btn-sm"><i
                                     class="ti-save"></i>Simpan</button>

@@ -24,7 +24,7 @@
                     <div class="card-header border d-flex justify-content-between">
                         <h4>UBAH DATA</h4>
                         <div class="btn-group float-end" role="group" aria-label="Basic mixed styles example">
-                            <a class="btn icon-left btn-warning btn-sm" href="{{ route('karyawan.semua') }}"><i
+                            <a class="btn icon-left btn-warning btn-sm" onclick="window.history.back()" href="javascript:void(0)"><i
                                     class="ti-close"></i>Batal</a>
                             <button type="submit" class="btn icon-left btn-primary btn-sm"><i
                                     class="ti-save"></i>Simpan</button>
@@ -129,7 +129,7 @@
                     <div class="card-body border">
 
                         <div class="btn-group float-end" role="group">
-                            <a class="btn icon-left btn-warning btn-sm" href="{{ route('karyawan.semua') }}"><i
+                            <a class="btn icon-left btn-warning btn-sm" onclick="window.history.back()" href="javascript:void(0)"><i
                                     class="ti-close"></i>Batal</a>
                             <button type="submit" class="btn icon-left btn-primary btn-sm"><i
                                     class="ti-save"></i>Simpan</button>

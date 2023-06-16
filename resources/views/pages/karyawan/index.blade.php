@@ -50,10 +50,10 @@
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
                                                     <td>
-                                                        {{ $item->profile->nama_depan . $item->profile->nama_belakang ? $item->profile->nama_belakang : '' }}
+                                                        {{ ucfirst($item->profile->nama_depan) . ' ' . ucfirst($item->profile->nama_belakang) }}
                                                     </td>
                                                     <td></td>
-                                                    <td class="text-center">{{ $item->profile->jenis_kelamin }}</td>
+                                                    <td class="text-center">{{ ucfirst($item->profile->jenis_kelamin) }}</td>
                                                     <td class="text-center">
                                                         {{ $item->tempat_lahir . ', ' . $item->tanggal_lahir ? date('d M Y', strtotime($item->tanggal_lahir)) : '' }}
                                                     </td>
@@ -65,8 +65,8 @@
                                                             <a class="btn icon-left btn-warning btn-sm"
                                                                 href="{{ route('karyawan.ubah', $item->id) }}"><i
                                                                     class="ti-pencil-alt"></i>Ubah</a>
-                                                            <a class="btn icon-left btn-danger btn-sm"
-                                                                href="{{ route('karyawan.hapus', $item->id) }}"><i
+                                                            <a class="btn icon-left btn-danger btn-sm" id="delete" data-url="{{ route('karyawan.hapus', $item->id) }}" data-id="{{ $item->id }}"
+                                                                href="javascript:void(0)"><i
                                                                     class="ti-trash"></i>Hapus</a>
                                                         </div>
                                                     </td>
@@ -86,10 +86,55 @@
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('assets/css/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.css') }}">
 @endpush
 
 @push('js')
     <script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
     {{-- {{ $dataTable->scripts(attributes: ['type' => 'module']) }} --}}
+    <script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('table').on('click', '#delete', function() {
+                let dataURL = $(this).data('url');
+                let id = $(this).data('id');
+                let trObj = $(this);
+                let token = $("meta[name='csrf-token']").attr("content");
+
+                Swal.fire({
+                    title: 'Apakah yakin?',
+                    text: 'kamu akan menghapus data ini!!!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'TIDAK',
+                    confirmButtonText: 'YA, HAPUS!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: dataURL,
+                            type: 'DELETE',
+                            cache: false,
+                            data: {
+                                '_token': token
+                            },
+                            success: function(res) {
+                                Swal.fire({
+                                    type: 'success',
+                                    icon: 'success',
+                                    title: `${res.message}`,
+                                    showConfirmButton: false,
+                                    timer: 3000
+                                });
+
+                                //remove post on table
+                                trObj.parents("tr").remove();
+                                // $(`#index-${id}`).remove();
+                            }
+                        })
+                    }
+                })
+            })
+        })
+    </script>
 @endpush
