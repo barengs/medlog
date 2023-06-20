@@ -13,20 +13,20 @@ class CheckupSeeder extends Seeder
      */
     public function run(): void
     {
-        Checkup::create([
-            'antrian' => '001',
-            'user_id' => 1,
-            'pasien_id' => 1,
-            'status' => 'open',
-            'penanganan' => 'rawat mandiri',
-        ]);
+        // Checkup::create([
+        //     'antrian' => '001',
+        //     'user_id' => 1,
+        //     'pasien_id' => 1,
+        //     'status' => 'open',
+        //     'penanganan' => 'rawat mandiri',
+        // ]);
 
-        Checkup::create([
-            'antrian' => '002',
-            'user_id' => 1,
-            'pasien_id' => 2,
-            'penanganan' => 'rawat mandiri',
-            'status' => 'open',
-        ]);
+        // Checkup::create([
+        //     'antrian' => '002',
+        //     'user_id' => 1,
+        //     'pasien_id' => 2,
+        //     'penanganan' => 'rawat mandiri',
+        //     'status' => 'open',
+        // ]);
     }
 }

@@ -72,8 +72,8 @@
                     <span>Pengaturan</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a href="auth-login.html" class="link"><span>Login</span></a></li>
-                    <li><a href="auth-register.html" class="link"><span>Register</span></a></li>
+                    <li><a id="profil" href="javascript:void(0)" class="link"><span>Profil</span></a></li>
+                    <li><a id="logout" href="javascript:void(0)" class="link logout"><span>Logout</span></a></li>
                 </ul>
             </li>
             {{-- <li>

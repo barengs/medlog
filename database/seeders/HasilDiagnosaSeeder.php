@@ -13,9 +13,9 @@ class HasilDiagnosaSeeder extends Seeder
      */
     public function run(): void
     {
-        HasilDiagnosa::create([
-            'checkup_id' => 1,
-            'diagnosa' => 'Kecapean',
-        ]);
+        // HasilDiagnosa::create([
+        //     'checkup_id' => 1,
+        //     'diagnosa' => 'Kecapean',
+        // ]);
     }
 }

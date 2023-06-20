@@ -67,7 +67,7 @@ class PasienController extends Controller
             $noPasien = 'P001' . date('mY', strtotime(Carbon::now()));
         }
 
-        // dd($request->all());
+        // dd($noPasien);
 
         $save = Pasien::create([
             'no_pasien' => $noPasien,
@@ -188,8 +188,8 @@ class PasienController extends Controller
         //ambil 3 karakter setelah karakter pertama
         $oldnum = substr($lastNumber, 1, 3);
 
-        $newNum = substr($oldnum, 1, 3);
-        $docnum = 'P' . sprintf("%03d", $newNum + 1);
+        $newNum = $oldnum + 1;
+        $docnum = 'P' . sprintf("%03d", $newNum);
 
         // ambil tanggal sekarang
         $monthYear = date('mY', strtotime(Carbon::now()));

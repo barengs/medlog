@@ -14,7 +14,7 @@ class PasienSeeder extends Seeder
     public function run(): void
     {
         Pasien::create([
-            'no_pasien' => 'P001052023',
+            'no_pasien' => 'P001042023',
             'nama_depan' => 'Muhammad',
             'nama_belakang' => 'Barick',
             'jenis_kelamin' => 'pria',

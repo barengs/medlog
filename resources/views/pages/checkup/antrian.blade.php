@@ -115,12 +115,14 @@
                                             </tr>
                                         @else
                                             @foreach ($data->keluhan as $item)
-                                                <tr>
+                                                <tr class="{{ $data->diagnosa === null ? 'table-warning' : '' }}">
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ ucfirst($item->keluhan) }}</td>
                                                     <td>{{ $item->lama_keluhan . ' ' . $item->satuan }}</td>
                                                     <td>{{ date('d M Y', strtotime($item->created_at)) }}</td>
-                                                    <td>{{ $data->diagnosa->diagnosa }}</td>
+                                                    <td>
+                                                        {{ $data->diagnosa !== null ? $data->diagnosa->diagnosa : '' }}
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @endif

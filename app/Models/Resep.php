@@ -21,4 +21,9 @@ class Resep extends Model
     {
         return $this->hasMany(Checkup::class);
     }
+
+    public function obats()
+    {
+        return $this->belongsTo(Obat::class);
+    }
 }

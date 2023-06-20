@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('hasil_diagnosas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('checkup_id');
+            // $table->unsignedBigInteger('keluhan_id');
             $table->string('diagnosa');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('checkup_id')->references('id')->on('checkups')->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('keluhan_id')->references('id')->on('keluhan_pasiens')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

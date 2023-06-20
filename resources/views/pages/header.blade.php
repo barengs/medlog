@@ -5,7 +5,7 @@
             <div class="theme-switch-icon"></div>
         </div>
         <div class="header-content">
-            
+
             <div class="notification dropdown">
                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="far fa-bell"></i>
@@ -75,7 +75,7 @@
                                 <i class="ti-settings"></i> Setting
                             </div>
                         </a>
-                        <a href="#">
+                        <a id="logout" class="logout" href="javascript:void(0)">
                             <div class="description">
                                 <i class="ti-power-off"></i> Logout
                             </div>

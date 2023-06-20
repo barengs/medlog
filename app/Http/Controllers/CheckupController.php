@@ -48,7 +48,7 @@ class CheckupController extends Controller
                     }
                 })
                 ->addColumn('action', function ($data) {
-                    $show = '<a class="btn btn-sm btn-info icon-left" href="cetak/' . $data->id . '"><i class="ti-print"></i> Proses</a>';
+                    $show = '<a class="btn btn-sm btn-info icon-left" href="cetak/' . $data->id . '"><i class="ti-print"></i> Cetak Resep</a>';
                     if ($data->status === 'proses') {
                         return '<div class="btn-group">' . $show . '</div>';
                     }
@@ -117,11 +117,17 @@ class CheckupController extends Controller
         $lastDate = Checkup::select('antrian', 'created_at')->latest()->first();
         // dd($lastDate);
         $dateNow = Carbon::now();
-        if (date('dm', strtotime($lastDate->created_at)) === date('dm', strtotime($dateNow))) {
+        if (!$lastDate) {
             $docnum = '001';
-        } else {
+        }
+        else if (date('dm', strtotime($lastDate->created_at)) === date('dm', strtotime($dateNow))){
+            $docnum = '001';
+        }
+        else {
             $docnum = $this->createNumber($lastDate->antrian);
         }
+
+        // dd($docnum);
         // simpan data
         $save = Checkup::create([
             'antrian' => $docnum,
@@ -152,6 +158,16 @@ class CheckupController extends Controller
     public function show(Checkup $checkup)
     {
         return view('pages.checkup.show');
+    }
+
+    public function resep($id)
+    {
+        $data = Resep::join('obats', 'obats.id', '=', 'reseps.obat_id')
+            ->select('obats.nama', 'reseps.satuan', 'reseps.aturan')
+            ->where('checkup_id', $id)
+            ->get();
+        // dd($data);
+        return view('pages.checkup.resep', compact('data'));
     }
 
     /**
@@ -216,6 +232,7 @@ class CheckupController extends Controller
 
     public function createNumber($oldnum)
     {
-        return sprintf("%03d", $oldnum + 1);
+        $newNumber = $oldnum + 1;
+        return sprintf("%03d", $newNumber);
     }
 }

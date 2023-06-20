@@ -173,7 +173,8 @@
                                     // $('#nama').val('')
                                     // $('#jenis_kelamin').val('')
                                     // $('#alamat').val('')
-                                } else if (new Date(res.checkup.created_at)
+                                } else if (res.checkup !== null && new Date(res.checkup
+                                        .created_at)
                                     .toLocaleDateString(
                                         "id-ID") === new Date().toLocaleDateString(
                                         "id-ID")) {
@@ -185,7 +186,7 @@
                                         cancelButtonText: 'TIDAK',
                                         confirmButtonText: 'YA!'
                                     }).then((res) => {
-                                        if (!res.isConfirmed) {
+                                        if (res.isConfirmed) {
                                             $('#ktp').val('');
                                             $('#nama').val('')
                                             $('#jenis_kelamin').val('')
@@ -195,7 +196,7 @@
                                     })
 
                                 } else {
-                                    console.log(res);
+                                    // console.log(res);
                                     $('#pasien_id').val(res.pasien.id);
                                     $('#ktp').val(res.pasien.no_ktp);
                                     $('#nama').val(

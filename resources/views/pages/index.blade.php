@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Dashboard &mdash; Arfa</title>
+    <title>{{ config('app.name', 'MedLog') }}fa</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
         integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
         crossorigin="anonymous" />
@@ -90,8 +90,8 @@
         </div>
 
         <footer>
-            Copyright © 2022 &nbsp <a href="https://www.youtube.com/c/mulaidarinull" target="_blank" class="ml-1">
-                Mulai Dari Null </a> <span> . All rights Reserved</span>
+            Copyright © {{ date('Y') }} &nbsp <a href="https://www.barengsaya.com" target="_blank" class="ml-1">
+                Barengs </a> <span> . All rights Reserved</span>
         </footer>
         <div class="overlay action-toggle">
         </div>
@@ -107,6 +107,24 @@
         Main.init()
     </script>
     @stack('js')
+    <script>
+        $(document).ready(function() {
+            $('.logout').on('click', function() {
+                // console.log('keluar');
+                let TOKEN = $("meta[name='csrf-token']").attr("content");
+                $.ajax({
+                    url: "{{ route('logout') }}",
+                    type: 'POST',
+                    data: {
+                        '_token': TOKEN,
+                    },
+                    success: function(res) {
+                        location.reload();
+                    }
+                })
+            })
+        })
+    </script>
 </body>
 
 </html>
