@@ -217,7 +217,7 @@ class CheckupController extends Controller
 
             if ($diagnosa) {
                 toastr()->success('Data berhasil disimpan!');
-                return redirect()->route('checkup.semua');
+                return redirect()->route('periksa.semua');
             }
         }
     }

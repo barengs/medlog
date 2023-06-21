@@ -20,5 +20,21 @@ class UserProfileSeeder extends Seeder
             'alamat' => 'admin system',
             'no_handphone' => '1234567890'
         ]);
+
+        UserProfile::create([
+            'user_id' => 2,
+            'nama_depan' => 'Badrus',
+            'nama_belakang' => 'Sabidil',
+            'alamat' => 'Palengaan Laok',
+            'no_handphone' => '1234567890'
+        ]);
+
+        UserProfile::create([
+            'user_id' => 3,
+            'nama_depan' => 'Idris',
+            'nama_belakang' => 'Amrozi',
+            'alamat' => 'Palengaan Dajah',
+            'no_handphone' => '1234567890'
+        ]);
     }
 }

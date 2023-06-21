@@ -23,58 +23,83 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-            <li class="{{ Request::is('checkup/*', 'pasien/*', 'periksa/*') ? 'open active' : '' }}">
-                <a href="#" class="main-menu has-dropdown">
-                    <i class="ti-desktop"></i>
-                    <span>Pemeriksaan</span>
-                </a>
-                <ul class="sub-menu {{ Request::is('checkup/*', 'pasien/*', 'periksa/*') ? 'expand' : '' }}">
-                    <li class="{{ Request::is('checkup/*') ? 'active' : '' }}"><a href="/checkup/semua"
-                            class="link"><span>Antrian</span></a></li>
-                    <li class="{{ Request::is('periksa/*') ? 'active' : '' }}"><a href="{{ route('periksa.semua') }}"
-                            class="link"><span>Pemeriksaan</span></a></li>
-                    <li class="{{ Request::is('pasien/*') ? 'active' : '' }}"><a href="/pasien/semua"
-                            class="link"><span>Pasien</span></a></li>
-                </ul>
-            </li>
-            <li class="{{ Request::is('obat/*', 'kategori-obat/*') ? 'open active' : '' }}">
-                <a href="#" class="main-menu has-dropdown">
-                    <i class="ti-book"></i>
-                    <span>Obat</span>
-                </a>
-                <ul class="sub-menu {{ Request::is('obat/*', 'kategori-obat/*') ? 'expand' : '' }}">
-                    <li class="{{ Request::is('obat/*') ? 'active' : '' }}"><a href="/obat/semua"
-                            class="link"><span>Daftar Obat</span></a></li>
-                    <li class="{{ Request::is('kategori-obat/*') ? 'active' : '' }}"><a href="/kategori-obat/semua"
-                            class="link"><span>Kategori Obat</span></a></li>
-                </ul>
-            </li>
-            <li class="{{ Request::is('karyawan/*', 'jabatan/*', 'role/*', 'permission/*') ? 'open active' : '' }}">
-                <a href="#" class="main-menu has-dropdown">
-                    <i class="ti-user"></i>
-                    <span>Pengguna</span>
-                </a>
-                <ul
-                    class="sub-menu {{ Request::is('karyawan/*', 'jabatan/*', 'role/*', 'permission/*') ? 'expand' : '' }}">
-                    <li class="{{ Request::is('karyawan/*') ? 'active' : '' }}"><a href="/karyawan/semua"
-                            class="link"><span>Karyawan</span></a></li>
-                    <li class="{{ Request::is('jabatan/*') ? 'active' : '' }}"><a href="/jabatan/semua"
-                            class="link"><span>Jabatan</span></a></li>
-                    <li class="{{ Request::is('role/*') ? 'active' : '' }}"><a href="/role/semua"
-                            class="link"><span>Peran</span></a></li>
-                    <li class="{{ Request::is('permission/*') ? 'active' : '' }}"><a href="/permission/semua"
-                            class="link"><span>Izin</span></a></li>
-                </ul>
-            </li>
+            @hasanyrole(['admin', 'staff', 'dokter'])
+                <li class="{{ Request::is('checkup/*', 'pasien/*', 'periksa/*') ? 'open active' : '' }}">
+                    <a href="#" class="main-menu has-dropdown">
+                        <i class="ti-desktop"></i>
+                        <span>Pemeriksaan</span>
+                    </a>
+                    <ul class="sub-menu {{ Request::is('checkup/*', 'pasien/*', 'periksa/*') ? 'expand' : '' }}">
+                        @hasanyrole('admin|staff')
+                            <li class="{{ Request::is('checkup/*') ? 'active' : '' }}"><a href="/checkup/semua"
+                                    class="link"><span>Antrian</span></a></li>
+                        @endhasanyrole
+                        @hasanyrole('admin|dokter')
+                            <li class="{{ Request::is('periksa/*') ? 'active' : '' }}"><a href="{{ route('periksa.semua') }}"
+                                    class="link"><span>Pemeriksaan</span></a></li>
+                        @endhasanyrole
+                        @hasanyrole('admin|staff')
+                            <li class="{{ Request::is('pasien/*') ? 'active' : '' }}"><a href="/pasien/semua"
+                                    class="link"><span>Pasien</span></a></li>
+                        @endhasanyrole
+                    </ul>
+                </li>
+            @endhasanyrole
+            @role('admin')
+                <li class="{{ Request::is('obat/*', 'kategori-obat/*') ? 'open active' : '' }}">
+                    <a href="#" class="main-menu has-dropdown">
+                        <i class="ti-book"></i>
+                        <span>Obat</span>
+                    </a>
+                    <ul class="sub-menu {{ Request::is('obat/*', 'kategori-obat/*') ? 'expand' : '' }}">
+                        <li class="{{ Request::is('obat/*') ? 'active' : '' }}"><a href="/obat/semua"
+                                class="link"><span>Daftar Obat</span></a></li>
+                        <li class="{{ Request::is('kategori-obat/*') ? 'active' : '' }}"><a href="/kategori-obat/semua"
+                                class="link"><span>Kategori Obat</span></a></li>
+                    </ul>
+                </li>
+
+                <li class="{{ Request::is('karyawan/*', 'jabatan/*', 'role/*', 'permission/*') ? 'open active' : '' }}">
+                    <a href="#" class="main-menu has-dropdown">
+                        <i class="ti-user"></i>
+                        <span>Pengguna</span>
+                    </a>
+                    <ul
+                        class="sub-menu {{ Request::is('karyawan/*', 'jabatan/*', 'role/*', 'permission/*') ? 'expand' : '' }}">
+                        <li class="{{ Request::is('karyawan/*') ? 'active' : '' }}"><a href="/karyawan/semua"
+                                class="link"><span>Karyawan</span></a></li>
+                        <li class="{{ Request::is('jabatan/*') ? 'active' : '' }}"><a href="/jabatan/semua"
+                                class="link"><span>Jabatan</span></a></li>
+                        <li class="{{ Request::is('role/*') ? 'active' : '' }}"><a href="/role/semua"
+                                class="link"><span>Peran</span></a></li>
+                        <li class="{{ Request::is('permission/*') ? 'active' : '' }}"><a href="/permission/semua"
+                                class="link"><span>Izin</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="main-menu has-dropdown">
+                        <i class="ti-settings"></i>
+                        <span>Pengaturan</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a id="profil" href="javascript:void(0)" class="link"><span>Profil Sistem</span></a></li>
+                    </ul>
+                </li>
+            @endrole
+            @hasanyrole('admin|dokter|staff')
+                <li class="{{ Request::is('profil') ? 'active' : '' }}">
+                    <a href="/profil" class="link">
+                        <i class="ti-user"></i>
+                        <span>Profil</span>
+                    </a>
+                </li>
+            @endhasanyrole
+
             <li>
-                <a href="#" class="main-menu has-dropdown">
-                    <i class="ti-settings"></i>
-                    <span>Pengaturan</span>
+                <a id="logout" href="javascript:void(0)" class="link logout">
+                    <i class="ti-power-off"></i>
+                    <span>Logout</span>
                 </a>
-                <ul class="sub-menu">
-                    <li><a id="profil" href="javascript:void(0)" class="link"><span>Profil</span></a></li>
-                    <li><a id="logout" href="javascript:void(0)" class="link logout"><span>Logout</span></a></li>
-                </ul>
             </li>
             {{-- <li>
                 <a href="#" class="main-menu has-dropdown">
