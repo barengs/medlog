@@ -10,6 +10,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GlobalDataConroller;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\KategoriObatController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Models\UserProfile;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,10 +30,13 @@ use App\Http\Controllers\KategoriObatController;
 Route::get('/', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profil', [ProfileController::class, 'show'])->name('profile.show');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('profile', [UserController::class, 'index'])->name('user.index');
+    Route::get('profile/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('profile/{id}', [UserController::class, 'update'])->name('user.update');
+    // Route::get('/profil', [ProfileController::class, 'show'])->name('profile.show');
+    // Route::get('/profil/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::group(['prefix' => 'karyawan'], function () {
         Route::get('semua', [UserProfileController::class, 'index'])->name('karyawan.semua');
@@ -43,12 +49,12 @@ Route::middleware('auth')->group(function () {
     });
     
     Route::group(['prefix' => 'jabatan'], function () {
-        Route::get('semua', [PositionController::class, 'index'])->name('jabatan.semua');
-        Route::get('tambah', [PositionController::class, 'create'])->name('jabatan.tambah');
-        Route::post('simpan', [PositionController::class, 'store'])->name('jabatan.simpan');
-        Route::get('ubah/{id}', [PositionController::class, 'edit'])->name('jabatan.ubah');
-        Route::put('ganti/{id}', [PositionController::class, 'update'])->name('jabatan.ganti');
-        Route::delete('hapus/{id}', [PositionController::class, 'destroy'])->name('jabatan.hapus');
+        Route::get('semua', [RoleController::class, 'index'])->name('jabatan.semua');
+        Route::get('tambah', [RoleController::class, 'create'])->name('jabatan.tambah');
+        Route::post('simpan', [RoleController::class, 'store'])->name('jabatan.simpan');
+        Route::get('ubah/{id}', [RoleController::class, 'edit'])->name('jabatan.ubah');
+        Route::put('ganti/{id}', [RoleController::class, 'update'])->name('jabatan.ganti');
+        Route::delete('hapus/{id}', [RoleController::class, 'destroy'])->name('jabatan.hapus');
     });
     
     Route::group(['prefix' => 'obat'], function () {

@@ -22,8 +22,8 @@
                     <div class="card-header border d-flex justify-content-between">
                         <h4>TAMBAH DATA</h4>
                         <div class="btn-group float-end" role="group" aria-label="Basic mixed styles example">
-                            <a class="btn icon-left btn-warning btn-sm" onclick="window.history.back()" href="javascript:void(0)"><i
-                                    class="ti-close"></i>Batal</a>
+                            <a class="btn icon-left btn-warning btn-sm" onclick="window.history.back()"
+                                href="javascript:void(0)"><i class="ti-close"></i>Batal</a>
                             <button type="submit" class="btn icon-left btn-primary btn-sm"><i
                                     class="ti-save"></i>Simpan</button>
                         </div>
@@ -58,8 +58,8 @@
                             <div class="col-lg-4">
                                 <div class="mb-3">
                                     <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
-                                    <input type="text" name="tanggal_lahir" class="form-control date"
-                                        id="tanggal_lahir" aria-describedby="withHelperTextBottomHelp" required>
+                                    <input type="text" name="tanggal_lahir" class="form-control date" id="tanggal_lahir"
+                                        aria-describedby="withHelperTextBottomHelp" required>
                                 </div>
                             </div>
 
@@ -85,7 +85,8 @@
                             <div class="col-lg-4">
                                 <div class="mb-3">
                                     <label for="status" class="form-label">Jenis Kelamin</label>
-                                    <select id="status" name="jenis_kelamin" class="js-example-basic-single form-select" required>
+                                    <select id="status" name="jenis_kelamin" class="js-example-basic-single form-select"
+                                        required>
                                         <option value="pria">Pria</option>
                                         <option value="wanita">Wanita</option>
                                     </select>
@@ -118,9 +119,10 @@
                                 <div class="col-lg-4">
                                     <div class="mb-3">
                                         <label for="jabatan" class="form-label">Jabatan</label>
-                                        <select id="jabatan" name="jabatan" class="js-example-basic-single form-select">
+                                        <select id="jabatan" name="jabatan"
+                                            class="js-example-basic-single form-select">
                                             @foreach ($jabatan as $item)
-                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -132,8 +134,8 @@
                     <div class="card-body border">
 
                         <div class="btn-group float-end" role="group">
-                            <a class="btn icon-left btn-warning btn-sm" onclick="window.history.back()" href="javascript:void(0)"><i
-                                    class="ti-close"></i>Batal</a>
+                            <a class="btn icon-left btn-warning btn-sm" onclick="window.history.back()"
+                                href="javascript:void(0)"><i class="ti-close"></i>Batal</a>
                             <button type="submit" class="btn icon-left btn-primary btn-sm"><i
                                     class="ti-save"></i>Simpan</button>
                         </div>

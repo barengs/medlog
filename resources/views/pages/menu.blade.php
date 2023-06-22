@@ -70,8 +70,8 @@
                                 class="link"><span>Karyawan</span></a></li>
                         <li class="{{ Request::is('jabatan/*') ? 'active' : '' }}"><a href="/jabatan/semua"
                                 class="link"><span>Jabatan</span></a></li>
-                        <li class="{{ Request::is('role/*') ? 'active' : '' }}"><a href="/role/semua"
-                                class="link"><span>Peran</span></a></li>
+                        {{-- <li class="{{ Request::is('role/*') ? 'active' : '' }}"><a href="/role/semua"
+                                class="link"><span>Peran</span></a></li> --}}
                         <li class="{{ Request::is('permission/*') ? 'active' : '' }}"><a href="/permission/semua"
                                 class="link"><span>Izin</span></a></li>
                     </ul>
@@ -87,8 +87,8 @@
                 </li>
             @endrole
             @hasanyrole('admin|dokter|staff')
-                <li class="{{ Request::is('profil') ? 'active' : '' }}">
-                    <a href="/profil" class="link">
+                <li class="{{ Request::is('profile', 'profile/*') ? 'active' : '' }}">
+                    <a href="{{ route('user.index') }}" class="link">
                         <i class="ti-user"></i>
                         <span>Profil</span>
                     </a>

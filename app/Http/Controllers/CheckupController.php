@@ -121,10 +121,10 @@ class CheckupController extends Controller
             $docnum = '001';
         }
         else if (date('dm', strtotime($lastDate->created_at)) === date('dm', strtotime($dateNow))){
-            $docnum = '001';
+            $docnum = $this->createNumber($lastDate->antrian);
         }
         else {
-            $docnum = $this->createNumber($lastDate->antrian);
+            $docnum = '001';
         }
 
         // dd($docnum);

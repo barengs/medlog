@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
@@ -11,7 +12,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $data = Role::all();
+
+        return view('pages.jabatan.index', compact('data'));
     }
 
     /**
@@ -19,7 +22,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.jabatan.add');
     }
 
     /**
@@ -27,7 +30,17 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $save = Role::create([
+            'name' => strtolower($request->nama),
+        ]);
+
+        if ($save) {
+            toastr()->success('Data berhasil di simpan', 'Sukses');
+            return redirect()->route('jabatan.semua');
+        } else {
+            toastr()->error('Data gagal di simpan', 'Info');
+            return redirect()->route('jabatan.semua');
+        }
     }
 
     /**
@@ -43,7 +56,8 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = Role::findOrFail($id);
+        return view('pages.jabatan.edit', compact('data'));
     }
 
     /**
@@ -51,7 +65,18 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = Role::findOrFail($id);
+
+        $data->nama = $request->nama;
+        $data->update();
+
+        if ($data) {
+            toastr()->success('Data berhasil di ubah!');
+            return redirect()->route('jabatan.semua');
+        } else {
+            toastr()->error('Gagal!', 'Perubahan data gagal, periksa kembali.');
+            return back()->withInput();
+        }
     }
 
     /**

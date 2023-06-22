@@ -29,13 +29,13 @@
                                     <div class="btn-group float-end" role="group" aria-label="Basic mixed styles example">
                                         <a class="btn btn-secondary btn-sm icon-left" onclick="window.history.back()"
                                             href="javascript:void(0)"><i class="ti-home"></i>Kembali</a>
-                                        <a class="btn btn-primary btn-sm icon-left" onclick="window.history.back()"
+                                        <a class="btn btn-primary btn-sm icon-left" onclick="printPage('printArea')"
                                             href="javascript:void(0)"><i class="ti-printer"></i>Cetak</a>
                                     </div>
                                 </dv>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" id="printArea">
                             <div class="table-responsive">
                                 <div class="row">
                                     <div class="col-md-12 text-center">
@@ -78,3 +78,15 @@
         </div>
     </div>
 @endsection
+
+@push('css')
+@endpush
+
+@push('js')
+    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+    <script>
+        function printPage() {
+            printJS('printArea', 'html');
+        }
+    </script>
+@endpush

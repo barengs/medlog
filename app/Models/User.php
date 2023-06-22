@@ -45,9 +45,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function jabatan(): HasOne
+    public function jabatan()
     {
-        return $this->hasOne(Position::class);
+        return $this->belongsToMany(Position::class);
     }
 
     public function profile()

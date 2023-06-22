@@ -52,10 +52,11 @@
                                                     <td>
                                                         {{ ucfirst($item->profile->nama_depan) . ' ' . ucfirst($item->profile->nama_belakang) }}
                                                     </td>
-                                                    <td></td>
-                                                    <td class="text-center">{{ ucfirst($item->profile->jenis_kelamin) }}</td>
+                                                    <td>{{ ucfirst($item->roles->pluck('name')[0]) }}</td>
+                                                    <td class="text-center">{{ ucfirst($item->profile->jenis_kelamin) }}
+                                                    </td>
                                                     <td class="text-center">
-                                                        {{ $item->tempat_lahir . ', ' . $item->tanggal_lahir ? date('d M Y', strtotime($item->tanggal_lahir)) : '' }}
+                                                        {{ $item->profile->tempat_lahir ? $item->profile->tempat_lahir . ', ' . date('d M Y', strtotime($item->profile->tanggal_lahir)) : '-' }}
                                                     </td>
                                                     <td class="text-center">
                                                         <div class="btn-group">
@@ -65,8 +66,9 @@
                                                             <a class="btn icon-left btn-warning btn-sm"
                                                                 href="{{ route('karyawan.ubah', $item->id) }}"><i
                                                                     class="ti-pencil-alt"></i>Ubah</a>
-                                                            <a class="btn icon-left btn-danger btn-sm" id="delete" data-url="{{ route('karyawan.hapus', $item->id) }}" data-id="{{ $item->id }}"
-                                                                href="javascript:void(0)"><i
+                                                            <a class="btn icon-left btn-danger btn-sm" id="delete"
+                                                                data-url="{{ route('karyawan.hapus', $item->id) }}"
+                                                                data-id="{{ $item->id }}" href="javascript:void(0)"><i
                                                                     class="ti-trash"></i>Hapus</a>
                                                         </div>
                                                     </td>

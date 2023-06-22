@@ -9,6 +9,7 @@ use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserProfileController extends Controller
 {
@@ -17,7 +18,7 @@ class UserProfileController extends Controller
      */
     public function index()
     {
-        $data = User::with('profile')->get();
+        $data = User::with('profile')->with('roles')->get();
         // $data = DB::table('user_profiles as us')
         //     ->join('users as u', 'u.id', '=', 'us.user_id')
         //     ->select('us.id', 'us.nama_depan', 'us.nama_belakang', 'us.jenis_kelamin', 'us.tempat_lahir', 'us.tanggal_lahir')
@@ -30,7 +31,7 @@ class UserProfileController extends Controller
      */
     public function create()
     {
-        $jabatan = Position::all();
+        $jabatan = Role::all();
         return view('pages.karyawan.add', compact('jabatan'));
     }
 
@@ -59,7 +60,11 @@ class UserProfileController extends Controller
                 'no_ktp' => $request->no_ktp,
             ]);
 
+            $user->assignRole($request->jabatan);
+
             if ($profil) {
+
+                toastr()->success('Data berhasil disimpan!');
                 return redirect()->route('karyawan.semua');
             } else {
                 return back()->withInput();
@@ -83,18 +88,39 @@ class UserProfileController extends Controller
      */
     public function edit($id)
     {
-        $data = User::with('profile')->where('id', $id)->first();
+        $data = User::with('profile')->with('roles')->where('id', $id)->first();
+        $jabatan = Role::all();
         if ($data) {
-            return view('pages.karyawan.edit', compact('data'));
+            return view('pages.karyawan.edit', compact(['data', 'jabatan']));
         }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UserProfile $userProfile)
+    public function update(Request $request, $id)
     {
-        //
+        $profile = UserProfile::where('user_id', $id)->first();
+
+        $profile->nama_depan = $request->nama_depan;
+        $profile->nama_belakang = $request->nama_belakang;
+        $profile->tempat_lahir = $request->tempat_lahir;
+        $profile->tanggal_lahir = Carbon::parse($request->tanggal_lahir)->format('Y/m/d');
+        $profile->jenis_kelamin = $request->jenis_kelamin;
+        $profile->no_handphone = $request->no_handphone;
+        $profile->alamat = $request->alamat;
+        $profile->no_ktp = $request->no_ktp;
+
+        if ($profile->update())
+        {
+            $user = User::findOrFail($id);
+
+            $user->assignRole($request->jabatan);
+            
+            toastr()->success('Data berhasil diubah!');
+
+            return redirect()->route('karyawan.semua');
+        }
     }
 
     /**

@@ -13,8 +13,8 @@ class Position extends Model
 
     protected $fillable = ['nama', 'status'];
 
-    public function user(): BelongsTo
+    public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class);
     }
 }
