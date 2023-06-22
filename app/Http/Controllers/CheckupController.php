@@ -21,7 +21,7 @@ class CheckupController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $query = Checkup::with('pasien')->get();
+            $query = Checkup::with('pasien')->with('diagnosa')->get();
 
             return DataTables::of($query)
                 ->addIndexColumn()
@@ -34,6 +34,9 @@ class CheckupController extends Controller
                 })
                 ->addColumn('no_ktp', function ($data) {
                     return $data->pasien->no_ktp;
+                })
+                ->addColumn('diagnosa', function($data) {
+                    return $data->diagnosa ? $data->diagnosa->diagnosa : '-';
                 })
                 ->addColumn('status', function ($data) {
                     $open = '<span class="badge bg-success">' . $data->status . '</span>';

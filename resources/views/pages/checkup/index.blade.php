@@ -22,10 +22,10 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <dv class="col">
+                                <div class="col">
                                     <h4 class="card-title">Data Pemeriksaan</h4>
-                                </dv>
-                                <dv class="col">
+                                </div>
+                                <div class="col">
                                     <div class="btn-group float-end" role="group" aria-label="Basic mixed styles example">
                                         <a class="btn btn-secondary btn-sm icon-left" href="{{ route('dashboard') }}"><i
                                                 class="ti-home"></i>Kembali</a>
@@ -34,7 +34,7 @@
                                         <a class="btn btn-primary btn-sm icon-left" href="{{ route('checkup.tambah') }}"><i
                                                 class="ti-list"></i>Buat Antrian</a>
                                     </div>
-                                </dv>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">
@@ -49,6 +49,7 @@
                                             <th>Nama</th>
                                             <th>No KTP</th>
                                             <th>Status</th>
+                                            <th>Diagnosa</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -106,6 +107,10 @@
                         data: 'status',
                         name: 'status',
                         className: 'text-center',
+                    },
+                    {
+                        data: 'diagnosa',
+                        name: 'diagnosa'
                     },
                     {
                         data: 'action',
