@@ -97,13 +97,15 @@ class PasienController extends Controller
     public function show($id)
     {
         $data = Pasien::findOrFail($id);
+        $medis = Checkup::with('keluhan')->with('diagnosa')->where('pasien_id', $data->id)->get();
+        // dd($medis);
         $riwayat = DB::table('keluhan_pasiens as kp')
             ->join('checkups as c', 'c.id', '=', 'kp.checkup_id')
             // ->join('hasil_diagnosas as hd', 'hd.checkup_id', '=', 'c.id')
             ->select('kp.checkup_id', 'kp.keluhan', 'kp.lama_keluhan', 'kp.satuan', 'kp.created_at')
             ->where('c.pasien_id', $data->id)
             ->get();
-        return view('pages.pasien.show', compact(['data', 'riwayat']));
+        return view('pages.pasien.show', compact(['data', 'medis']));
     }
 
     /**
