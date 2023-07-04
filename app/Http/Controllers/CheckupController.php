@@ -21,10 +21,14 @@ class CheckupController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $query = Checkup::with('pasien')->with('diagnosa')->get();
+            $query = Checkup::with('pasien')->with('diagnosa')->orderBy('created_at', 'desc')->get();
 
             return DataTables::of($query)
                 ->addIndexColumn()
+                ->addColumn('tanggal', function($data) {
+                    $tanggal = date('d M Y', strtotime($data->created_at));
+                    return $tanggal;
+                })
                 ->addColumn('no_pasien', function ($data) {
                     return $data->pasien->no_pasien;
                 })
@@ -56,7 +60,7 @@ class CheckupController extends Controller
                         return '<div class="btn-group">' . $show . '</div>';
                     }
                 })
-                ->rawColumns(['no_pasien', 'nama', 'no_ktp', 'status', 'action'])
+                ->rawColumns(['tanggal', 'no_pasien', 'nama', 'no_ktp', 'status', 'action'])
                 ->make(true);
         }
         return view('pages.checkup.index');

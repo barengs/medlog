@@ -76,8 +76,8 @@
                                         <th rowspan="2" class="align-middle">Diagnosis</th>
                                     </tr>
                                     <tr>
-                                        <th>Keluhan</th>
-                                        <th>Lama Sakit</th>
+                                        <th class="col-md-4">Keluhan</th>
+                                        <th class="col-md-2">Lama Sakit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -86,13 +86,22 @@
                                             <tr>
                                                 <td rowspan="{{ count($item->keluhan) }}">
                                                     {{ date('d M Y H:m:s', strtotime($item->created_at)) }}</td>
+                                                <td colspan="2">
+                                                    @foreach ($item->keluhan as $k)
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                {{ $k->keluhan }}
 
-                                                @foreach ($item->keluhan as $k)
-                                                    <td>{{ $k->keluhan }}</td>
-                                                    <td>{{ $k->lama_keluhan . ' ' . $k->satuan }}</td>
-                                                @endforeach
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                {{ $k->lama_keluhan . ' ' . $k->satuan }}
 
-                                                <td>{{ $item->diagnosa->diagnosa }}</td>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </td>
+
+                                                <td>{{ $item->diagnosa ? $item->diagnosa->diagnosa : '' }}</td>
                                             </tr>
                                         @endforeach
                                     @else

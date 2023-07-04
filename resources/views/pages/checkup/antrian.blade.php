@@ -185,7 +185,7 @@
                         <h5>Rekomendasi</h5>
                         <div class="row">
                             <div class="col-md-4">
-                                <select name="" id="" class="form-control" required>
+                                <select name="penanganan" id="" class="form-control" required>
                                     <option value="">---Pilih---</option>
                                     <option value="rujuk">Rujuk ke RS</option>
                                     <option value="rawat inap">Rawat Inap</option>

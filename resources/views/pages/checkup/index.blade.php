@@ -44,12 +44,14 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>Tanggal</th>
                                             <th>No Antrian</th>
                                             <th>No Anggota</th>
                                             <th>Nama</th>
                                             <th>No KTP</th>
                                             <th>Status</th>
                                             <th>Diagnosa</th>
+                                            <th>Rekom</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -88,6 +90,10 @@
                         class: 'text-center'
                     },
                     {
+                        data: 'tanggal',
+                        name: 'tanggal'
+                    },
+                    {
                         data: 'antrian',
                         name: 'antrian'
                     },
@@ -111,6 +117,10 @@
                     {
                         data: 'diagnosa',
                         name: 'diagnosa'
+                    },
+                    {
+                        data: 'penanganan',
+                        name: 'penanganan'
                     },
                     {
                         data: 'action',
