@@ -85,7 +85,9 @@
                         <div class="form-group row">
                             <label for="" class="col-sm-4 col-form-label">Password</label>
                             <div class="col-md-8">
-                                : <a href="#" class="btn btn-warning btn-sm">Ganti Password</a>
+                                : <a href="{{ route('pass.reset', $profil->user_id) }}"
+                                    class="btn btn-warning btn-sm">Ganti
+                                    Password</a>
                             </div>
                         </div>
                     </div>

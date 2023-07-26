@@ -24,19 +24,24 @@ use App\Models\UserProfile;
 //     return view('layouts.auth-login');
 // });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', function () {
+    return view('landing.home');
+})->name('landingpage');
+
+Route::group(['prefix' => 'user'], function() {
+    Route::get('login', function() { return view('landing.login'); })->name('user.login');
+    Route::get('register', function() { return view('landing.register'); })->name('user.register');
+    Route::get('antrian', function() { return view('landing.ticket'); })->name('user.antrian');
+});
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('profile', [UserController::class, 'index'])->name('user.index');
     Route::get('profile/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::put('profile/{id}', [UserController::class, 'update'])->name('user.update');
-    // Route::get('/profil', [ProfileController::class, 'show'])->name('profile.show');
-    // Route::get('/profil/{id}', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('profile/{id}/reset', [UserController::class, 'reset'])->name('pass.reset');
+    Route::put('profile/{id}', [UserController::class, 'passtore'])->name('pass.store');
 
     Route::group(['prefix' => 'karyawan'], function () {
         Route::get('semua', [UserProfileController::class, 'index'])->name('karyawan.semua');
@@ -107,6 +112,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
-
-

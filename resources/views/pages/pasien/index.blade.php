@@ -22,11 +22,11 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <dv class="col">
+                                <div class="col">
                                     <h4 class="card-title">Data Pasien</h4>
 
-                                </dv>
-                                <dv class="col">
+                                </div>
+                                <div class="col">
                                     <div class="btn-group float-end" role="group" aria-label="Basic mixed styles example">
                                         <a class="btn btn-primary btn-sm icon-left" href="{{ route('pasien.tambah') }}"><i
                                                 class="ti-list"></i>Daftarkan Pasien</a>
@@ -34,7 +34,7 @@
                                                 class="ti-home"></i>Kembali</a>
                                     </div>
 
-                                </dv>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body">

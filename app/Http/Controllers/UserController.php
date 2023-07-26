@@ -17,9 +17,9 @@ class UserController extends Controller
     {
         $data = Auth::user();
         $data = User::where('id', auth()->user()->id)->with('roles')->first();
-        $profil = UserProfile::where('id', $data->id)->first();
+        $profil = UserProfile::where('id', $data->id)->with('user')->first();
         // dd($profil);
-        return view('pages.user.show', compact(['data', 'profil']));
+        return view('pages.profile.show', compact(['data', 'profil']));
     }
 
     /**
@@ -54,7 +54,7 @@ class UserController extends Controller
         // $user = Auth::user();
         $data = UserProfile::where('user_id', $id)->with('user')->first();
         // dd($data);
-        return view('pages.user.edit', compact('data'));
+        return view('pages.profile.edit', compact('data'));
     }
 
     /**
@@ -87,5 +87,11 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function reset($id)
+    {
+        $data = User::findOrFail($id);
+        return view('pages.profile.reset', compact('data'));
     }
 }
