@@ -57,7 +57,7 @@
     <!-- info section -->
     <section class="info_section ">
         <div class="container">
-            
+
             <div class="info_bottom layout_padding2">
                 <div class="row info_main_row">
                     <div class="col-md-6 col-lg-6">
@@ -136,9 +136,9 @@
     <!-- footer section -->
 
     <!-- jQery -->
-    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="{{ asset('landing/js/jquery-3.4.1.min.js') }}"></script>
     <!-- bootstrap js -->
-    <script src="js/bootstrap.js"></script>
+    <script src="{{ asset('landing/js/bootstrap.js') }}"></script>
     <!-- nice select -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"
         integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
@@ -147,7 +147,7 @@
     <!-- datepicker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
     <!-- custom js -->
-    <script src="js/custom.js"></script>
+    <script src="{{ asset('landing/js/custom.js') }}"></script>
 
 
 </body>

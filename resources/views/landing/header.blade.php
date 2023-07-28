@@ -32,8 +32,8 @@
 
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class=""> </span>
                 </button>
 
@@ -41,32 +41,51 @@
                     <div class="d-flex mr-auto flex-column flex-lg-row align-items-center">
                         <ul class="navbar-nav  ">
                             <li class="nav-item active">
-                                <a class="nav-link" href="/">Beranda <span
+                                <a class="nav-link" href="{{ route('landingpage') }}">Beranda <span
                                         class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="about.html"> Tentang</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.antrian') }}">Antrian</a>
-                            </li>
+                            @auth
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('user.antrian') }}">Antrian</a>
+                                </li>
+                            @endauth
                             <li class="nav-item">
                                 <a class="nav-link" href="contact.html">Kontak Kami</a>
                             </li>
                         </ul>
                     </div>
                     <div class="quote_btn-container">
-                        <a href="{{ route('user.login') }}">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                            <span>
-                                Masuk
-                            </span>
-                        </a>
-                        <a href="{{ route('user.register') }}">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                            <span>
-                                Daftar
-                            </span>
+                        @if (Route::has('user.login'))
+                            @auth
+                                <a href="{{ route('user.profil') }}">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <span>
+                                        Profil
+                                    </span>
+                                </a>
+                                <a href="">
+                                    <i class="fa fa-lock" aria-hidden="true"></i>
+                                    <span>
+                                        Keluar
+                                    </span>
+                                </a>
+                            @else
+                                <a href="{{ route('user.login') }}">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <span>
+                                        Masuk
+                                    </span>
+                                </a>
+                                <a href="{{ route('user.register') }}">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <span>
+                                        Daftar
+                                    </span>
+                                @endauth
+                        @endif
                         </a>
                         <form class="form-inline">
                             <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">

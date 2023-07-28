@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GlobalDataConroller;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\KategoriObatController;
+use App\Http\Controllers\PasienFrontController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Models\UserProfile;
@@ -24,14 +25,14 @@ use App\Models\UserProfile;
 //     return view('layouts.auth-login');
 // });
 
-Route::get('/', function () {
-    return view('landing.home');
-})->name('landingpage');
+Route::get('/', [PasienFrontController::class, 'index'])->name('landingpage');
 
 Route::group(['prefix' => 'user'], function() {
     Route::get('login', function() { return view('landing.login'); })->name('user.login');
-    Route::get('register', function() { return view('landing.register'); })->name('user.register');
+    Route::get('register', [PasienFrontController::class, 'create'])->name('user.register');
+    Route::get('register/store', [PasienFrontController::class, 'store'])->name('user.store');
     Route::get('antrian', function() { return view('landing.ticket'); })->name('user.antrian');
+    Route::get('profil', [PasienFrontController::class, 'show'])->name('user.profil');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');

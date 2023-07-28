@@ -42,6 +42,7 @@ class UserRolePermissionSeeder extends Seeder
         $roleAdmin = Role::create(['name' => 'admin']);
         $roleDokter = Role::create(['name' => 'dokter']);
         $roleStaff = Role::create(['name' => 'staff']);
+        $roleUser = Role::create(['name' => 'user']);
 
         $permission = Permission::create(['name' => 'read kategori obat']);
         $permission = Permission::create(['name' => 'create kategori obat']);
