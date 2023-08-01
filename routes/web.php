@@ -14,6 +14,7 @@ use App\Http\Controllers\PasienFrontController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Models\UserProfile;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::group(['prefix' => 'user'], function() {
     Route::get('register/store', [PasienFrontController::class, 'store'])->name('user.store');
     Route::get('antrian', function() { return view('landing.ticket'); })->name('user.antrian');
     Route::get('profil', [PasienFrontController::class, 'show'])->name('user.profil');
+    Route::get('{id}/cari', [PasienController::class, 'cari'])->name('user.cari');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');

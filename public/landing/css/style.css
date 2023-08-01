@@ -529,7 +529,7 @@ a:focus {
 }
 
 .book_section form button.btn {
-  background-color: #252525;
+  /* background-color: #252525; */
   color: #ffffff;
   padding: 10px 45px;
   border-radius: 5px;

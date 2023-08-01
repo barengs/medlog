@@ -16,7 +16,7 @@
 
 
     <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('landing/css/bootstrap.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('landing/css/bootstrap.min.css') }}" />
 
     <!-- fonts style -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -37,7 +37,7 @@
     <link href="{{ asset('landing/css/style.css') }}" rel="stylesheet" />
     <!-- responsive style -->
     <link href="{{ asset('landing/css/responsive.css') }}" rel="stylesheet" />
-
+    @stack('css')
 </head>
 
 <body>
@@ -149,7 +149,7 @@
     <!-- custom js -->
     <script src="{{ asset('landing/js/custom.js') }}"></script>
 
-
+    @stack('javascript')
 </body>
 
 </html>

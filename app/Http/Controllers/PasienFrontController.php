@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use App\Models\Pasien;
 use App\Models\User;
+use App\Models\Pasien;
+use App\Models\Checkup;
 use Illuminate\Http\Request;
+use App\Models\KeluhanPasien;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PasienFrontController extends Controller
@@ -100,7 +103,12 @@ class PasienFrontController extends Controller
      */
     public function show()
     {
-        $data = Pasien::where('user_id', auth()->user()->id)->first();
+        if (Auth::check())
+        {
+            return redirect()->route('user.login');
+        } else {
+            $data = Pasien::where(auth()->user()->id)->first();
+        }
         // dd($data);
         return view('landing.profil', compact('data'));
     }
@@ -127,6 +135,53 @@ class PasienFrontController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * Buat antrian baru
+     */
+    public function antrian(Request $request)
+    {
+        if (Auth::check()){
+            return redirect()->route('user.logi');
+        }
+        // buat nomor antrian baru
+        $lastDate = Checkup::select('antrian', 'created_at')->latest()->first();
+        // dd($lastDate);
+        $dateNow = Carbon::now();
+        if (!$lastDate) {
+            $docnum = '001';
+        }
+        else if (date('dm', strtotime($lastDate->created_at)) === date('dm', strtotime($dateNow))){
+            $docnum = $this->createNumber($lastDate->antrian);
+        }
+        else {
+            $docnum = '001';
+        }
+
+        // dd($docnum);
+        // simpan data
+        $save = Checkup::create([
+            'antrian' => $docnum,
+            'user_id' => 1,
+            'pasien_id' => $request->pasien_id,
+        ]);
+
+        if ($save) {
+            if (count($request->keluhan) > 0) {
+                foreach ($request->keluhan as $key => $value) {
+                    $keluhan = array(
+                        'checkup_id' => $save->id,
+                        'keluhan' => $value,
+                        'lama_keluhan' => $request->lama_keluhan[$key],
+                        'satuan' => $request->satuan[$key],
+                    );
+                    KeluhanPasien::create($keluhan);
+                }
+            }
+            toastr()->success('Data berhasil disimpan!');
+            return redirect()->route('checkup.semua');
+        }
     }
 
     /**
