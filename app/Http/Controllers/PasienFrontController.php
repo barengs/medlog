@@ -153,7 +153,7 @@ class PasienFrontController extends Controller
             $docnum = '001';
         }
         else if (date('dm', strtotime($lastDate->created_at)) === date('dm', strtotime($dateNow))){
-            $docnum = $this->createNumber($lastDate->antrian);
+            $docnum = $this->createAntrian($lastDate->antrian);
         }
         else {
             $docnum = '001';
@@ -201,5 +201,11 @@ class PasienFrontController extends Controller
         $monthYear = date('mY', strtotime(Carbon::now()));
         $newDocNum = $docnum . $monthYear;
         return $newDocNum;
+    }
+
+    public function createAntrian($oldnum)
+    {
+        $newNumber = $oldnum + 1;
+        return sprintf("%03d", $newNumber);
     }
 }
