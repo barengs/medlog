@@ -66,7 +66,7 @@
                                         Profil
                                     </span>
                                 </a>
-                                <a href="">
+                                <a href="javascript:void(0)" id="logout">
                                     <i class="fa fa-lock" aria-hidden="true"></i>
                                     <span>
                                         Keluar

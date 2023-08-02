@@ -3,79 +3,116 @@
 @section('content')
     <section class="book_section layout_padding">
         <div class="container">
-            <div class="row">
-                <div class="col">
-                    <form class="" method="POST" action="{{ route('user.antrian') }}">
-                        @csrf
-                        <h4>
-                            AMBIL <span>ANTRIAN</span>
-                        </h4>
-                        <div class="form-row ">
-                            <div class="form-group col-lg-4">
-                                <label for="nik">NOMOR ANGGOTA/NIK </label>
-                                <div class="input-group">
-                                    <input type="text" name="nik" class="form-control"
-                                        placeholder="tulis nomor peserta / nik" id="cari" required>
-                                    <span class="input-group-addon date_icon">
-                                        <i class="fa fa-search" aria-hidden="true"></i>
-                                    </span>
+            @if (!$checkup)
+                <div class="row">
+                    <div class="col">
+                        <form class="" method="POST" action="{{ route('user.antrian') }}">
+                            @csrf
+                            <h4>
+                                AMBIL <span>ANTRIAN</span>
+                            </h4>
+                            <div class="form-row ">
+                                <div class="form-group col-lg-4">
+                                    <label for="nik">NOMOR ANGGOTA/NIK </label>
+                                    <div class="input-group">
+                                        <input type="text" name="nik" class="form-control"
+                                            placeholder="tulis nomor peserta / nik" id="cari" required>
+                                        <span class="input-group-addon date_icon">
+                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <!-- input id pasien -->
+                                <input type="hidden" name="pasien_id" id="pasien_id" />
+                                <div class="form-group col-lg-4">
+                                    <label for="nama">Nama</label>
+                                    <input type="text" class="form-control" id="nama" placeholder="" disabled>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="jenis_kelamin">Jenis Kelamin</label>
+                                    <input type="text" class="form-control" id="jenis_kelamin" placeholder="" disabled>
                                 </div>
                             </div>
-                            <!-- input id pasien -->
-                            <input type="hidden" name="pasien_id" id="pasien_id" />
-                            <div class="form-group col-lg-4">
-                                <label for="nama">Nama</label>
-                                <input type="text" class="form-control" id="nama" placeholder="" disabled>
+                            <div class="form-row ">
+                                <div class="form-group col-lg-4">
+                                    <label for="tempat_lahir">Tempat Lahir</label>
+                                    <input type="number" name="tempat_lahir" class="form-control" id="tempat_lahir"
+                                        placeholder="" disabled>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="tanggal_lahir">Tanggal Lahir</label>
+                                    <input type="text" name="tanggl_lahir" class="form-control" id="tanggal_lahir"
+                                        placeholder="" disabled>
+                                </div>
                             </div>
-                            <div class="form-group col-lg-4">
-                                <label for="jenis_kelamin">Jenis Kelamin</label>
-                                <input type="text" class="form-control" id="jenis_kelamin" placeholder="" disabled>
+                            <hr>
+                            <h5>Keluhan Pasien</h5>
+                            <table class="table" id="kotak">
+                                <tr id="kolom">
+                                    <td class="col-lg-6">
+                                        <input class="form-control" type="text" name="keluhan[]" id="keluhan"
+                                            placeholder="Tulis keluhan anda disini.." required>
+                                    </td>
+                                    <td class="col-lg-2">
+                                        <input class="form-control" type="number" name="lama_keluhan[]" id="lama_keluhan"
+                                            placeholder="Masa?">
+                                    </td>
+                                    <td class="col-lg-2">
+                                        <select name="satuan[]" id="satuan" class="form-control" required>
+                                            <option>---</option>
+                                            <option value="hari">Hari</option>
+                                            <option value="jam">Jam</option>
+                                            <option value="minggu">Miggu</option>
+                                            <option value="bulan">Bulan</option>
+                                        </select>
+                                    </td>
+                                    <td class="justify-content-center d-flex align-items-start">
+                                        <a href="javascript:void(0)" id="addKeluhan" class="btn btn-success">Tambah</a>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="btn-box">
+                                <button type="submit" id="btnSave" class="btn btn-primary" disabled>BUAT ANTRIAN</button>
                             </div>
-                        </div>
-                        <div class="form-row ">
-                            <div class="form-group col-lg-4">
-                                <label for="tempat_lahir">Tempat Lahir</label>
-                                <input type="number" name="tempat_lahir" class="form-control" id="tempat_lahir"
-                                    placeholder="" disabled>
-                            </div>
-                            <div class="form-group col-lg-4">
-                                <label for="tanggal_lahir">Tanggal Lahir</label>
-                                <input type="text" name="tanggl_lahir" class="form-control" id="tanggal_lahir"
-                                    placeholder="" disabled>
-                            </div>
-                        </div>
-                        <hr>
-                        <h5>Keluhan Pasien</h5>
-                        <table class="table" id="kotak">
-                            <tr id="kolom">
-                                <td class="col-lg-6">
-                                    <input class="form-control" type="text" name="keluhan[]" id="keluhan"
-                                        placeholder="Tulis keluhan anda disini.." required>
-                                </td>
-                                <td class="col-lg-2">
-                                    <input class="form-control" type="number" name="lama_keluhan[]" id="lama_keluhan"
-                                        placeholder="Masa?">
-                                </td>
-                                <td class="col-lg-2">
-                                    <select name="satuan[]" id="satuan" class="form-control" required>
-                                        <option>---</option>
-                                        <option value="hari">Hari</option>
-                                        <option value="jam">Jam</option>
-                                        <option value="minggu">Miggu</option>
-                                        <option value="bulan">Bulan</option>
-                                    </select>
-                                </td>
-                                <td class="justify-content-center d-flex align-items-start">
-                                    <a href="javascript:void(0)" id="addKeluhan" class="btn btn-success">Tambah</a>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="btn-box">
-                            <button type="submit" id="btnSave" class="btn btn-primary" disabled>BUAT ANTRIAN</button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            @else
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>DATA <span>ANTRIAN</span></h4>
+                                <div class="form-row">
+                                    <div class="form-group col-lg-4">
+                                        <h5>{{ $pasien->nama_depan }} {{ $pasien->nama_belakang }}</h5>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-lg-4">
+                                        <label for="">Nomor antrian</label>
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        <label for="">{{ $checkup->antrian }}</label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-lg-4">
+                                        <label for="">Tanggal dan Waktu</label>
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        <label for="">{{ date('d M Y', strtotime($checkup->created_at)) }}</label>
+                                    </div>
+                                </div>
+                                <div class="btn-box">
+                                    <button type="button" id="btnSave" class="btn btn-primary">CETAK
+                                        ANTRIAN</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
     </section>
 @endsection

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\DataTables\PasienDataTable;
 use App\Models\Checkup;
 use App\Models\KeluhanPasien;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
@@ -68,8 +69,14 @@ class PasienController extends Controller
         }
 
         // dd($noPasien);
+        $user = User::create([
+            'name' => $request->nama_depan,
+            'email' => $request->email,
+            'password' => bcrypt('password'),
+        ]);
 
         $save = Pasien::create([
+            'user_id' => $user->id,
             'no_pasien' => $noPasien,
             'nama_depan' => $request->nama_depan,
             'nama_belakang' => $request->nama_belakang,

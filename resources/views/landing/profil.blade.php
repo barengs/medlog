@@ -48,7 +48,9 @@
                         Nomor <span>Antrian</span>
                     </h4>
                     <div class="form-row">
-                        <h4>00000</h4>
+                        @if ($checkup)
+                            <h4>{{ $checkup->antrian }}</h4>
+                        @endif
                     </div>
                 </div>
             </div>

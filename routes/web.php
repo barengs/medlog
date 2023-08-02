@@ -31,11 +31,12 @@ Route::get('/', [PasienFrontController::class, 'index'])->name('landingpage');
 Route::group(['prefix' => 'user'], function() {
     Route::get('login', function() { return view('landing.login'); })->name('user.login');
     Route::get('register', [PasienFrontController::class, 'create'])->name('user.register');
-    Route::get('register/store', [PasienFrontController::class, 'store'])->name('user.store');
+    Route::post('register/store', [PasienFrontController::class, 'store'])->name('user.store');
     Route::get('antrian', [PasienFrontController::class, 'ticket'])->name('user.ticket');
     Route::post('antrian', [PasienFrontController::class, 'antrian'])->name('user.antrian');
     Route::get('profil', [PasienFrontController::class, 'show'])->name('user.profil');
     Route::get('{id}/cari', [PasienController::class, 'cari'])->name('user.cari');
+    Route::post('logout', [PasienFrontController::class, 'logout'])->name('user.logout');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');

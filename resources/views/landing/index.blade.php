@@ -11,6 +11,7 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Mico</title>
 
@@ -150,6 +151,24 @@
     <script src="{{ asset('landing/js/custom.js') }}"></script>
 
     @stack('javascript')
+
+    <script>
+        $(document).ready(function() {
+            $('#logout').on('click', function() {
+                let token = $("meta[name='csrf-token']").attr("content");
+                $.ajax({
+                    url: "{{ route('user.logout') }}",
+                    type: 'POST',
+                    data: {
+                        '_token': token,
+                    },
+                    success: function(e) {
+                        location.reload();
+                    }
+                })
+            })
+        })
+    </script>
 </body>
 
 </html>

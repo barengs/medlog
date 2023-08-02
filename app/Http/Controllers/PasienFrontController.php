@@ -34,12 +34,17 @@ class PasienFrontController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $validated = $request->validate([
             'no_ktp' => 'required',
             'nama_depan' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
         ]);
+
         /** CEK APA ADA DATA untuk membuat nomor anggota */
         $lastData = DB::table('pasiens')->latest()->first();
         if ($lastData->no_pasien) {
@@ -49,8 +54,8 @@ class PasienFrontController extends Controller
         }
         /** cek nomor ktp dulu */
         $cekKTP = Pasien::where('no_ktp', $request->no_ktp)->get();
-
-        if ($cekKTP) {
+        // dd($cekKTP);
+        if (!$cekKTP) {
             toastr()->warning('Perigatan', 'Nomor KTP sudah terdaftar');
             return back()->withInput();
         } else {
@@ -58,7 +63,7 @@ class PasienFrontController extends Controller
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => $request->password,
+                'password' => bcrypt($request->password),
             ]);
 
             if ($user) {
@@ -72,6 +77,7 @@ class PasienFrontController extends Controller
                     'alamat' => $request->alamat,
                     'tempat_lahir' => $request->tempat_lahir,
                     'tanggal_lahir' => Carbon::parse($request->tanggal_lahir)->format('Y/m/d'),
+                    'no_hp' => $request->no_hp,
                     'nama_kerabat' => $request->nama_kerabat,
                     'jenis_kelamin_kerabat' => $request->jenis_kelamin_kerabat,
                     'no_kontak_kerabat' => $request->no_kontak_kerabat,
@@ -109,8 +115,10 @@ class PasienFrontController extends Controller
         } else {
             $data = Pasien::where('user_id',auth()->user()->id)->first();
         }
+
+        $checkup = Checkup::where('pasien_id', $data->id)->first();
         // dd($data);
-        return view('landing.profil', compact('data'));
+        return view('landing.profil', compact(['data', 'checkup']));
     }
 
     /**
@@ -132,9 +140,15 @@ class PasienFrontController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function logout(Request $request)
     {
-        //
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('user.login');
     }
 
     /**
@@ -142,7 +156,11 @@ class PasienFrontController extends Controller
      */
     public function ticket()
     {
-        return view('landing.ticket');
+        $pasien = Pasien::where('user_id', auth()->user()->id)->first();
+        // ambil data antrian yang di buat hari ini.
+        $checkup = Checkup::where('pasien_id', $pasien->id)->whereDate('created_at', Carbon::today())->first();
+        // dd($checkup);
+        return view('landing.ticket', compact(['pasien', 'checkup']));
     }
 
     /**
@@ -188,7 +206,7 @@ class PasienFrontController extends Controller
                 }
             }
             toastr()->success('Data berhasil disimpan!');
-            return redirect()->route('user.profil');
+            return redirect()->route('user.ticket');
         }
     }
 
