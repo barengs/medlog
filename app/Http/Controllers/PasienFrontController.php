@@ -180,7 +180,7 @@ class PasienFrontController extends Controller
                 }
             }
             toastr()->success('Data berhasil disimpan!');
-            return redirect()->route('checkup.semua');
+            return redirect()->route('user.profil');
         }
     }
 
