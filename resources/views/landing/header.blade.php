@@ -49,7 +49,7 @@
                             </li>
                             @auth
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('user.antrian') }}">Antrian</a>
+                                    <a class="nav-link" href="{{ route('user.ticket') }}">Antrian</a>
                                 </li>
                             @endauth
                             <li class="nav-item">

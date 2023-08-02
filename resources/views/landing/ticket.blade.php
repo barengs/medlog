@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <form class="" method="POST" action="">
+                    <form class="" method="POST" action="{{ route('user.antrian') }}">
                         @csrf
                         <h4>
                             AMBIL <span>ANTRIAN</span>

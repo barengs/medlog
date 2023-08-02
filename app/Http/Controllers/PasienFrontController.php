@@ -103,11 +103,11 @@ class PasienFrontController extends Controller
      */
     public function show()
     {
-        if (Auth::check())
+        if (!Auth::user())
         {
             return redirect()->route('user.login');
         } else {
-            $data = Pasien::where(auth()->user()->id)->first();
+            $data = Pasien::where('user_id',auth()->user()->id)->first();
         }
         // dd($data);
         return view('landing.profil', compact('data'));
@@ -138,12 +138,20 @@ class PasienFrontController extends Controller
     }
 
     /**
+     * Panggil form antrian
+     */
+    public function ticket()
+    {
+        return view('landing.ticket');
+    }
+
+    /**
      * Buat antrian baru
      */
     public function antrian(Request $request)
     {
-        if (Auth::check()){
-            return redirect()->route('user.logi');
+        if (!Auth::check()){
+            return redirect()->route('user.login');
         }
         // buat nomor antrian baru
         $lastDate = Checkup::select('antrian', 'created_at')->latest()->first();
@@ -163,7 +171,7 @@ class PasienFrontController extends Controller
         // simpan data
         $save = Checkup::create([
             'antrian' => $docnum,
-            'user_id' => 1,
+            'user_id' => auth()->user()->id,
             'pasien_id' => $request->pasien_id,
         ]);
 

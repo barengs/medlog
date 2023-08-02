@@ -42,6 +42,16 @@
                     </tr>
                 </table>
             </div>
+            <div class="row">
+                <div class="col">
+                    <h4>
+                        Nomor <span>Antrian</span>
+                    </h4>
+                    <div class="form-row">
+                        <h4>00000</h4>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 @endsection

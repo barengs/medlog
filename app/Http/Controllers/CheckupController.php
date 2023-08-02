@@ -138,7 +138,7 @@ class CheckupController extends Controller
         // simpan data
         $save = Checkup::create([
             'antrian' => $docnum,
-            'user_id' => 1,
+            'user_id' => auth()->user()->id,
             'pasien_id' => $request->pasien_id,
         ]);
 
