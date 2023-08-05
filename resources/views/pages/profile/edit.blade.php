@@ -17,7 +17,7 @@
         </div>
         <div class="content-wrapper">
             {{-- perhatikan bagian ini, alamat atau route --}}
-            <form action="{{ route('user.update', $data->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('karyawan.ganti', $data->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="card">
