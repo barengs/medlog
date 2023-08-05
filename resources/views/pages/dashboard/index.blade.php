@@ -10,7 +10,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5>SELAMAT DATANG!!</h5>
-                        <p>Selamat datang Admin, saat ini anda berada pada sistem klinik</p>
+                        <p>Selamat datang {{ Auth::user()->name }}, saat ini anda berada pada sistem klinik</p>
                     </div>
                 </div>
                 <div class="col-md-6">

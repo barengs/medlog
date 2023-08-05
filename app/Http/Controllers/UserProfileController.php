@@ -18,7 +18,7 @@ class UserProfileController extends Controller
      */
     public function index()
     {
-        $data = User::with('profile')->with('roles')->get();
+        $data = User::with('profile')->with('roles')->notRole('user')->get();
         // $data = DB::table('user_profiles as us')
         //     ->join('users as u', 'u.id', '=', 'us.user_id')
         //     ->select('us.id', 'us.nama_depan', 'us.nama_belakang', 'us.jenis_kelamin', 'us.tempat_lahir', 'us.tanggal_lahir')
