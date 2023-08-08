@@ -34,6 +34,7 @@ Route::group(['prefix' => 'user'], function() {
     Route::post('register/store', [PasienFrontController::class, 'store'])->name('user.store');
     Route::get('antrian', [PasienFrontController::class, 'ticket'])->name('user.ticket');
     Route::post('antrian', [PasienFrontController::class, 'antrian'])->name('user.antrian');
+    Route::get('antrian/cetak', [PasienFrontController::class, 'cetakTicket'])->name('cetak.antrian');
     Route::get('profil', [PasienFrontController::class, 'show'])->name('user.profil');
     Route::get('{id}/cari', [PasienController::class, 'cari'])->name('user.cari');
     Route::post('logout', [PasienFrontController::class, 'logout'])->name('user.logout');

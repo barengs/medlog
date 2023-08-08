@@ -105,8 +105,9 @@
                                     </div>
                                 </div>
                                 <div class="btn-box">
-                                    <button type="button" id="btnSave" class="btn btn-primary">CETAK
-                                        ANTRIAN</button>
+                                    <a href="{{ route('cetak.antrian') }}" type="button" id="btnSave"
+                                        class="btn btn-primary">CETAK
+                                        ANTRIAN</a>
                                 </div>
                             </div>
                         </div>

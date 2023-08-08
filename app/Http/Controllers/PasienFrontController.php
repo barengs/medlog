@@ -8,6 +8,7 @@ use App\Models\Pasien;
 use App\Models\Checkup;
 use Illuminate\Http\Request;
 use App\Models\KeluhanPasien;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -161,6 +162,17 @@ class PasienFrontController extends Controller
         $checkup = Checkup::where('pasien_id', $pasien->id)->whereDate('created_at', Carbon::today())->first();
         // dd($checkup);
         return view('landing.ticket', compact(['pasien', 'checkup']));
+    }
+
+    public function cetakTicket()
+    {
+        $pasien = Pasien::where('user_id', auth()->user()->id)->first();
+        // ambil data antrian yang di buat hari ini.
+        $data = Checkup::where('pasien_id', $pasien->id)->whereDate('created_at', Carbon::today())->first();
+        Pdf::setOption(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+        $pdf = PDF::loadView('landing.cetak_ticket', ['data' => $data, 'pasien' => $pasien]);
+
+        return $pdf->download('ticket-' . $data->antrian . '.pdf');
     }
 
     /**
