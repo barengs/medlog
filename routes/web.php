@@ -107,6 +107,7 @@ Route::middleware('auth')->group(function () {
         Route::put('ganti/{id}', [CheckupController::class, 'update'])->name('checkup.ganti');
         Route::delete('hapus/{id}', [CheckupController::class, 'destroy'])->name('checkup.hapus');
         Route::get('cetak/{id}', [CheckupController::class, 'resep'])->name('checkup.resep');
+        Route::get('cetak/{id}/resep', [CheckupController::class, 'cetakResep'])->name('cetak.resep');
     });
     
     Route::group(['prefix' => 'periksa'], function () {

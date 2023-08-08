@@ -22,17 +22,17 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <dv class="col">
+                                <div class="col">
                                     <h4 class="card-title">RESEP DOKTER</h4>
-                                </dv>
-                                <dv class="col">
+                                </div>
+                                <div class="col">
                                     <div class="btn-group float-end" role="group" aria-label="Basic mixed styles example">
                                         <a class="btn btn-secondary btn-sm icon-left" onclick="window.history.back()"
                                             href="javascript:void(0)"><i class="ti-home"></i>Kembali</a>
-                                        <a class="btn btn-primary btn-sm icon-left" onclick="printPage('printArea')"
-                                            href="javascript:void(0)"><i class="ti-printer"></i>Cetak</a>
+                                        <a class="btn btn-primary btn-sm icon-left" href="{{ route('cetak.resep') }}"><i
+                                                class="ti-printer"></i>Cetak</a>
                                     </div>
-                                </dv>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body" id="printArea">

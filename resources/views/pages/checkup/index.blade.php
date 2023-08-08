@@ -132,5 +132,11 @@
                 ]
             })
         })
+        $(document).ready(function() {
+            $('table').on('click', '#cetak', function() {
+                // console.log('tes');
+                window.location.reload();
+            })
+        })
     </script>
 @endpush

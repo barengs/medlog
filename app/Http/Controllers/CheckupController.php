@@ -10,6 +10,7 @@ use App\Models\KeluhanPasien;
 use App\DataTables\CheckupsDataTable;
 use App\Models\HasilDiagnosa;
 use App\Models\Resep;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -55,7 +56,7 @@ class CheckupController extends Controller
                     }
                 })
                 ->addColumn('action', function ($data) {
-                    $show = '<a class="btn btn-sm btn-info icon-left" href="cetak/' . $data->id . '"><i class="ti-print"></i> Cetak Resep</a>';
+                    $show = '<a class="btn btn-sm btn-info icon-left" id="cetak" href="cetak/' . $data->id . '"><i class="ti-print"></i> Cetak Resep</a>';
                     if ($data->status === 'proses') {
                         return '<div class="btn-group">' . $show . '</div>';
                     }
@@ -169,12 +170,34 @@ class CheckupController extends Controller
 
     public function resep($id)
     {
+        $checkup = Checkup::with('pasien')->where('id', $id)->first();
+        $checkup->status = 'selesai';
+        $checkup->update();
+
         $data = Resep::join('obats', 'obats.id', '=', 'reseps.obat_id')
             ->select('obats.nama', 'reseps.satuan', 'reseps.aturan')
             ->where('checkup_id', $id)
             ->get();
+
+        $pdf = PDF::loadView('pages.checkup.cetak', ['data' => $data, 'checkup' => $checkup]);
+        return $pdf->download('resep-'.$checkup->antrian.'.pdf'); 
+        
         // dd($data);
-        return view('pages.checkup.resep', compact('data'));
+        // return view('pages.checkup.resep', compact('data'));
+    }
+
+    public function cetakResep($id)
+    {
+        $checkup = Checkup::where('id', $id)->first();
+        $checkup->antrian = 'selesai';
+        $checkup->update();
+
+        $data = Resep::join('obats', 'obats.id', '=', 'reseps.obat_id')
+            ->select('obats.nama', 'reseps.satuan', 'reseps.aturan')
+            ->where('checkup_id', $id)
+            ->get();
+        $pdf = PDF::loadView('page.checkup.cetak', ['data' => $data]);
+        return $pdf->download('resep-'.$checkup->antrian.'.pdf');        
     }
 
     /**

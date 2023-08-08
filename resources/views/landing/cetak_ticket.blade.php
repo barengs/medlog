@@ -18,13 +18,22 @@
         }
 
         #header h4 {
-            text-align: 'center';
-            justify-content: 'center',
+            text-align: center;
+            justify-content: center;
         }
 
-        .table {
-            border-width: 1px;
+        table,
+        tr,
+        td {
+            border-width: 1px solid;
             border-color: 'black';
+            padding: 10px;
+            border-collapse: collapse;
+
+        }
+
+        table {
+            width: 100%;
         }
     </style>
 </head>
