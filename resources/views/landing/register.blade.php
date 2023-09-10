@@ -12,19 +12,19 @@
                         </h4>
                         <div class="form-row ">
                             <div class="form-group col-lg-4">
-                                <label for="inputPatientName">NIK </label>
-                                <input type="text" name="no_ktp" class="form-control" id="inputPatientName"
-                                    placeholder="masukan no nik" required>
+                                <label for="nik">NIK </label>
+                                <input type="text" name="no_ktp" onkeyup="cleanAbjad('nik')" class="form-control"
+                                    id="nik" placeholder="masukan no nik" required>
                             </div>
                             <div class="form-group col-lg-4">
                                 <label for="nama_depan">Nama Depan</label>
-                                <input type="text" name="nama_depan" class="form-control" id="nama_depan"
-                                    placeholder="tulis nama depan" required>
+                                <input type="text" name="nama_depan" onkeyup="cleanNumber('nama_depan')"
+                                    class="form-control" id="nama_depan" placeholder="tulis nama depan" required>
                             </div>
                             <div class="form-group col-lg-4">
                                 <label for="nama_belakang">Nama Belakang</label>
-                                <input type="text" name="nama_belakang" class="form-control" id="nama_belakang"
-                                    placeholder="nama belakang bila ada">
+                                <input type="text" name="nama_belakang" onkeyup="cleanNumber('nama_belakang')"
+                                    class="form-control" id="nama_belakang" placeholder="nama belakang bila ada">
                             </div>
                         </div>
                         <div class="form-row">
@@ -56,9 +56,9 @@
                                 </div>
                             </div>
                             <div class="form-group col-lg-4">
-                                <label for="inputSymptoms">Nomor HP</label>
-                                <input type="text" name="no_hp" class="form-control" id="inputSymptoms"
-                                    placeholder="Nomor Handphone">
+                                <label for="hp">Nomor HP</label>
+                                <input type="text" name="no_hp" onkeyup="cleanAbjad('hp')" class="form-control"
+                                    id="hp" placeholder="Nomor Handphone">
                             </div>
                         </div>
                         <div class="form-row ">
@@ -107,3 +107,19 @@
         </div>
     </section>
 @endsection
+
+@push('javascript')
+    <script>
+        function cleanAbjad(e) {
+            let text = document.getElementById(e);
+            let regex = /[a-zA-Z]/gi;
+            text.value = text.value.replace(regex, "");
+        }
+
+        function cleanNumber(e) {
+            let text = document.getElementById(e);
+            let regex = /[0-9]/gi;
+            text.value = text.value.replace(regex, "");
+        }
+    </script>
+@endpush

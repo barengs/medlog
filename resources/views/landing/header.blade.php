@@ -5,13 +5,13 @@
                 <a href="">
                     <i class="fa fa-phone" aria-hidden="true"></i>
                     <span>
-                        Call : +01 123455678990
+                        Call : +62 123455678990
                     </span>
                 </a>
                 <a href="">
                     <i class="fa fa-envelope" aria-hidden="true"></i>
                     <span>
-                        Email : demo@gmail.com
+                        Email : info.rscm@gmail.com
                     </span>
                 </a>
                 <a href="">
@@ -44,16 +44,13 @@
                                 <a class="nav-link" href="{{ route('landingpage') }}">Beranda <span
                                         class="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="about.html"> Tentang</a>
-                            </li>
                             @auth
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('user.ticket') }}">Antrian</a>
                                 </li>
                             @endauth
                             <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Kontak Kami</a>
+                                <a class="nav-link" href="#">Kontak Kami</a>
                             </li>
                         </ul>
                     </div>

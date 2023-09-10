@@ -13,7 +13,7 @@
     <meta name="author" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Mico</title>
+    <title>RSCM</title>
 
 
     <!-- bootstrap core css -->
@@ -75,13 +75,13 @@
                             <a href="">
                                 <i class="fa fa-phone" aria-hidden="true"></i>
                                 <span>
-                                    Call +01 1234567890
+                                    Call +62 1234567890
                                 </span>
                             </a>
                             <a href="">
                                 <i class="fa fa-envelope"></i>
                                 <span>
-                                    demo@gmail.com
+                                    info.rscm@gmail.com
                                 </span>
                             </a>
                         </div>
@@ -109,10 +109,7 @@
                                 <a class="{{ Request::is('/') ? 'active' : '' }}" href="/">
                                     Beranda
                                 </a>
-                                <a href="about.html">
-                                    Tentang
-                                </a>
-                                <a href="contact.html">
+                                <a href="#">
                                     Hubungi Kami
                                 </a>
                             </div>
@@ -130,7 +127,7 @@
         <div class="container">
             <p>
                 &copy; <span id="displayYear"></span> All Rights Reserved By
-                <a href="https://html.design/">Free Html Templates</a>
+                <a href="https://barengsaya.com/">Barengs</a>
             </p>
         </div>
     </footer>
